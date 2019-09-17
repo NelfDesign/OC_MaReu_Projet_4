@@ -2,9 +2,12 @@ package fr.nelfdesign.mareu.Controllers;
 
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +27,11 @@ import fr.nelfdesign.mareu.R;
  */
 public class ReunionFragment extends Fragment {
 
+    private CoordinatorLayout mCoordinatorLayout;
     private RecyclerView mRecyclerView;
     private List<Reunion> mReunionList;
+    private FloatingActionButton mFloatingActionButton;
+    private ReunionListAdapter mReunionListAdapter;
 
     public ReunionFragment() {}
 
@@ -35,9 +41,13 @@ public class ReunionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_reunion, container, false);
-        mRecyclerView = (RecyclerView) view;
+
+        mRecyclerView = view.findViewById(R.id.reunion_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        mFloatingActionButton = view.findViewById((R.id.fab_add_reu));
         initList();
+        configurFab();
+        mCoordinatorLayout = (CoordinatorLayout) view;
         return view;
     }
 
@@ -46,13 +56,30 @@ public class ReunionFragment extends Fragment {
      */
     private void initList() {
         this.mReunionList = new ArrayList<>();
-        DateFormat df = new SimpleDateFormat("dd/MM/yy");
-        String date = df.format(Calendar.getInstance().getTime());
-        Reunion reunion1 = new Reunion( "Creation application", "salle 14",date, 14,null);
-        Reunion reunion2 = new Reunion( "Réunion 2", "salle 15",date, 15,null);
-        mReunionList.add(0, reunion1);
-        mReunionList.add(1, reunion2);
-        mRecyclerView.setAdapter(new ReunionListAdapter(mReunionList));
+        mReunionListAdapter = new ReunionListAdapter(mReunionList);
+        mRecyclerView.setAdapter(mReunionListAdapter);
     }
+
+    private void configurFab(){
+        mFloatingActionButton.setOnClickListener(view ->{
+            CreateReunionDialog createReunion = new CreateReunionDialog();
+
+            createReunion.mCreateReunionListener = new CreateReunionDialog.CreateReunionListener() {
+                @Override
+                public void onPositiveclick(Reunion reunion) {
+                    mReunionList.add(reunion);
+                    mReunionListAdapter.notifyDataSetChanged();
+                    Log.i("reunion", mReunionList.get(0).getReunionObject());
+                }
+
+                @Override
+                public void onNegativeClick() {
+                }
+            };
+            //show the DialogFragment
+            createReunion.show(getFragmentManager(), "CreateReunionDialog");
+        });
+    }
+
 
 }

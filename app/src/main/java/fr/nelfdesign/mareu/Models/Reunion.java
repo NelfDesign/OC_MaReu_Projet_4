@@ -9,7 +9,7 @@ import java.util.List;
 public class Reunion {
 
     //Fields
-    private int time;
+    private String time;
     private String room;
     private String reunionObject;
     private String mDate;
@@ -17,7 +17,7 @@ public class Reunion {
 
     //constructor
 
-    public Reunion(String reunionObject, String room, String  date, int time, List<Mail> mails) {
+    public Reunion(String reunionObject, String room, String  date, String time, List<Mail> mails) {
         this.time = time;
         this.room = room;
         this.mDate = date;
@@ -25,11 +25,11 @@ public class Reunion {
         this.mMail = mails;
     }
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
