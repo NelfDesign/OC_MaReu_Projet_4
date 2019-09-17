@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Controllers.CreateReunionDialog">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/theme_de_la_reunion"
+        style="@style/themetitle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+        android:id="@+id/edit_title_reu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/title"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteX="31dp" />
+
+    <TextView
+        android:id="@+id/title_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choisissez_votre_salle"
+        style="@style/themetitle"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <Spinner
+        android:id="@+id/spinner_room"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintLeft_toRightOf="@+id/title_room"
+        app:layout_constraintTop_toBottomOf="@id/edit_title_reu"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/title_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choisissez_votre_date"
+        style="@style/themetitle"
+        app:layout_constraintTop_toBottomOf="@id/title_room"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <CalendarView
+        android:id="@+id/calandar"
+        android:layout_width="311dp"
+        android:layout_height="298dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_time"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/title_heure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choisissez_votre_heure"
+        style="@style/themetitle"
+        app:layout_constraintTop_toBottomOf="@id/calandar"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <Spinner
+        android:id="@+id/spinner_hour"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintLeft_toRightOf="@+id/title_heure"
+        app:layout_constraintTop_toBottomOf="@id/calandar"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/title_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/entrez_le_nom_des_participants"
+        style="@style/themetitle"
+        app:layout_constraintTop_toBottomOf="@id/title_heure"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <EditText
+        android:id="@+id/edit_title_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_hour"
+        app:layout_constraintLeft_toRightOf="@+id/title_mail"
+        tools:layout_editor_absoluteX="31dp" />
+
+</android.support.constraint.ConstraintLayout>
