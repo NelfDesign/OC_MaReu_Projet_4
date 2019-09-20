@@ -9,7 +9,7 @@ public class RoomItemSpinner {
     private String roomName;
     private int roomImage;
 
-    public RoomItemSpinner(String roomName, int roomImage) {
+    public RoomItemSpinner(int roomImage, String roomName) {
         this.roomName = roomName;
         this.roomImage = roomImage;
     }

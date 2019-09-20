@@ -52,14 +52,34 @@
         app:layout_constraintTop_toBottomOf="@id/title_room"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <CalendarView
-        android:id="@+id/calandar"
-        android:layout_width="311dp"
-        android:layout_height="298dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_time"
-        android:layout_marginBottom="20dp"/>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/title_time"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_room"
+        android:text="date"
+        android:clickable="true"
+        android:focusable="true"
+        />
+
+    <LinearLayout
+        android:id="@+id/linear_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/title_time">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/themetitle"
+            tools:text="@string/app_name"
+            app:layout_constraintTop_toBottomOf="@id/linear_calendar"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/title_heure"
@@ -67,7 +87,7 @@
         android:layout_height="wrap_content"
         android:text="@string/choisissez_votre_heure"
         style="@style/themetitle"
-        app:layout_constraintTop_toBottomOf="@id/calandar"
+        app:layout_constraintTop_toBottomOf="@id/linear_calendar"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <Spinner
@@ -75,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         app:layout_constraintLeft_toRightOf="@+id/title_heure"
-        app:layout_constraintTop_toBottomOf="@id/calandar"
+        app:layout_constraintTop_toBottomOf="@id/linear_calendar"
         app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
@@ -89,10 +109,9 @@
 
     <EditText
         android:id="@+id/edit_title_mail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_hour"
-        app:layout_constraintLeft_toRightOf="@+id/title_mail"
-        tools:layout_editor_absoluteX="31dp" />
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_mail" />
 
 </android.support.constraint.ConstraintLayout>

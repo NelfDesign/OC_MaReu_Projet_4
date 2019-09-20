@@ -1,6 +1,5 @@
 package fr.nelfdesign.mareu.Models;
 
-import java.util.List;
 
 /**
  * Created by Nelfdesign at 15/09/2019
@@ -9,20 +8,21 @@ import java.util.List;
 public class Reunion {
 
     //Fields
-    private String time;
-    private String room;
     private String reunionObject;
+    private int idRoom;
+    private String nameRoom;
     private String mDate;
-    private List<Mail> mMail;
+    private String time;
+    private String mMail;
 
     //constructor
-
-    public Reunion(String reunionObject, String room, String  date, String time, List<Mail> mails) {
-        this.time = time;
-        this.room = room;
-        this.mDate = date;
+    public Reunion(String reunionObject, int idRoom, String nameRoom, String date, String time, String mail) {
         this.reunionObject = reunionObject;
-        this.mMail = mails;
+        this.idRoom = idRoom;
+        this.nameRoom = nameRoom;
+        mDate = date;
+        this.time = time;
+        mMail = mail;
     }
 
     public String getTime() {
@@ -33,12 +33,20 @@ public class Reunion {
         this.time = time;
     }
 
-    public String getRoom() {
-        return room;
+    public int getIdRoom() {
+        return idRoom;
     }
 
-    public void setRoom(String room) {
-        this.room = room;
+    public void setIdRoom(int idRoom) {
+        this.idRoom = idRoom;
+    }
+
+    public String getNameRoom() {
+        return nameRoom;
+    }
+
+    public void setNameRoom(String nameRoom) {
+        this.nameRoom = nameRoom;
     }
 
     public String getReunionObject() {
@@ -49,7 +57,7 @@ public class Reunion {
         this.reunionObject = reunionObject;
     }
 
-    public List<Mail> getMail() {
+    public String getMail() {
         return mMail;
     }
 

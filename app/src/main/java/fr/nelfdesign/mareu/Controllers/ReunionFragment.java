@@ -69,7 +69,6 @@ public class ReunionFragment extends Fragment {
                 public void onPositiveclick(Reunion reunion) {
                     mReunionList.add(reunion);
                     mReunionListAdapter.notifyDataSetChanged();
-                    Log.i("reunion", mReunionList.get(0).getReunionObject());
                 }
 
                 @Override

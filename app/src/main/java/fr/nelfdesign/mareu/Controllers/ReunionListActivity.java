@@ -1,19 +1,12 @@
 package fr.nelfdesign.mareu.Controllers;
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import fr.nelfdesign.mareu.Models.Reunion;
-import fr.nelfdesign.mareu.Models.RoomItemSpinner;
 import fr.nelfdesign.mareu.R;
 
 public class ReunionListActivity extends AppCompatActivity {

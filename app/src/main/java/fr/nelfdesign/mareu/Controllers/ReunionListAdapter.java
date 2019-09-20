@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.List;
 
@@ -62,25 +64,30 @@ public class ReunionListAdapter extends RecyclerView.Adapter<ReunionListAdapter.
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         Reunion reunion = mReunionList.get(position);
+
+        Glide.with(viewHolder.mImageSalle.getContext())
+                .load(reunion.getIdRoom())
+                .apply(RequestOptions.circleCropTransform())
+                .into(viewHolder.mImageSalle);
+
         viewHolder.mTextReu.setText(reunion.getReunionObject());
         if (reunion.getDate() == null){
             return;
         }else{
             viewHolder.mDate.setText(reunion.getDate());
         }
-        viewHolder.mHour.setText("-" + reunion.getTime() + " h");
+        viewHolder.mHour.setText("- " + reunion.getTime());
 
-        Glide.with(viewHolder.mImageSalle.getContext())
-        .load(reunion.getRoom())
-        .apply(RequestOptions.circleCropTransform())
-        .into(viewHolder.mImageSalle);
-
-        if (reunion.getMail() == null){
-            return;
+        if (reunion.getMail() != null){
+            if (reunion.getMail().length() < 30){
+                viewHolder.mTextMail.setText(reunion.getMail());
+            }else {
+                String str = reunion.getMail().substring(0, 30) + " ...";
+                viewHolder.mTextMail.setText(str);
+            }
         }else {
-            viewHolder.mTextMail.setText(reunion.getMail().toString());
+            return;
         }
-
     }
 
     @Override

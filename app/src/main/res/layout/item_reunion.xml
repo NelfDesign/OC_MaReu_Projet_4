@@ -12,8 +12,8 @@
 
         <ImageView
             android:id="@+id/image_salle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@mipmap/logo"
             android:layout_margin="10dp"
             app:layout_constraintLeft_toLeftOf="parent"
