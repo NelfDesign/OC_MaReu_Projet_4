@@ -9,15 +9,17 @@
     tools:context=".Controllers.ReunionListActivity">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        app:title="@string/app_name"/>
+        app:title="@string/app_name"
+        app:titleTextColor="#FFF"/>
 
     <FrameLayout
-        android:id="@+id/fragment_reunion"
+        android:id="@+id/framelayout_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp"/>
+        android:layout_below="@id/toolbar"/>
 
 </RelativeLayout>

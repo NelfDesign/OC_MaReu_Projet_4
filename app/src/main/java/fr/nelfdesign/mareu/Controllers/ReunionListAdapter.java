@@ -9,9 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 
 import java.util.List;
 
@@ -19,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.nelfdesign.mareu.Models.Reunion;
 import fr.nelfdesign.mareu.R;
+import fr.nelfdesign.mareu.Service.ReunionListService;
 
 /**
  * Created by Nelfdesign at 15/09/2019
@@ -26,13 +25,14 @@ import fr.nelfdesign.mareu.R;
  */
 public class ReunionListAdapter extends RecyclerView.Adapter<ReunionListAdapter.ViewHolder> {
 
+    ReunionListService mReunionListService;
     List<Reunion> mReunionList;
 
     public ReunionListAdapter(List<Reunion> reunionList) {
         mReunionList = reunionList;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.image_salle)
         public ImageView mImageSalle;
@@ -46,13 +46,13 @@ public class ReunionListAdapter extends RecyclerView.Adapter<ReunionListAdapter.
         public TextView mTextMail;
         @BindView(R.id.icon_delete)
         public ImageButton mDeleteButton;
+
         //constructor
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int position) {
@@ -88,6 +88,13 @@ public class ReunionListAdapter extends RecyclerView.Adapter<ReunionListAdapter.
         }else {
             return;
         }
+
+        viewHolder.mDeleteButton.setOnClickListener(v -> deleteReunion(reunion));
+    }
+
+    private void deleteReunion(Reunion reunion) {
+        ReunionListActivity.mReunionListService.deleteReunion(reunion);
+        this.notifyDataSetChanged();
     }
 
     @Override

@@ -1,7 +1,9 @@
 package fr.nelfdesign.mareu.Controllers;
 
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -12,29 +14,51 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import fr.nelfdesign.mareu.Models.Reunion;
 import fr.nelfdesign.mareu.R;
+import fr.nelfdesign.mareu.Service.ReunionListService;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ReunionFragment extends Fragment {
 
-    private CoordinatorLayout mCoordinatorLayout;
+    public interface fabListener{
+        void onFabClicked();
+    }
+
     private RecyclerView mRecyclerView;
-    private List<Reunion> mReunionList;
+    private ReunionListService mReunionList;
+    List<Reunion> mReunions;
     private FloatingActionButton mFloatingActionButton;
-    private ReunionListAdapter mReunionListAdapter;
+    fabListener mFabListener;
 
     public ReunionFragment() {}
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof ReunionFragment.fabListener){
+            mFabListener = (ReunionFragment.fabListener) context;
+        }else {
+            throw new RuntimeException(context.toString() + " must implemente interface");
+        }
+
+         if ( ReunionListActivity.mReunionListService == null){
+             mReunionList = new ReunionListService();
+         }else{
+             mReunions = ReunionListActivity.mReunionListService.getReunionList();
+         }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,40 +69,28 @@ public class ReunionFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.reunion_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mFloatingActionButton = view.findViewById((R.id.fab_add_reu));
-        initList();
+
+        initListAdapter();
         configurFab();
-        mCoordinatorLayout = (CoordinatorLayout) view;
         return view;
     }
 
-    /**
-     *
-     */
-    private void initList() {
-        this.mReunionList = new ArrayList<>();
-        mReunionListAdapter = new ReunionListAdapter(mReunionList);
-        mRecyclerView.setAdapter(mReunionListAdapter);
+    private void initListAdapter() {
+        mReunions = ReunionListActivity.mReunionListService.getReunionList();
+
+        mRecyclerView.setAdapter( new ReunionListAdapter(mReunions));
+        Log.i("reunion Fragment", String.valueOf(mReunions.size()));
     }
 
     private void configurFab(){
         mFloatingActionButton.setOnClickListener(view ->{
-            CreateReunionDialog createReunion = new CreateReunionDialog();
-
-            createReunion.mCreateReunionListener = new CreateReunionDialog.CreateReunionListener() {
-                @Override
-                public void onPositiveclick(Reunion reunion) {
-                    mReunionList.add(reunion);
-                    mReunionListAdapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onNegativeClick() {
-                }
-            };
-            //show the DialogFragment
-            createReunion.show(getFragmentManager(), "CreateReunionDialog");
+                mFabListener.onFabClicked();
         });
     }
 
-
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mFabListener = null;
+    }
 }

@@ -1,22 +1,18 @@
 package fr.nelfdesign.mareu.Controllers;
 
-import android.app.Application;
+
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CalendarView;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,19 +27,21 @@ import fr.nelfdesign.mareu.Models.RoomItem;
 import fr.nelfdesign.mareu.Models.RoomItemSpinner;
 import fr.nelfdesign.mareu.R;
 
-public class CreateReunionDialog extends DialogFragment{
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class CreationReunionFragment extends Fragment {
 
     public interface CreateReunionListener{
-        void onPositiveclick(Reunion reunion);
-        void onNegativeClick();
+        void onCreateReunion(Reunion reunion);
     }
 
-    CreateReunionListener mCreateReunionListener;
     private ArrayList<RoomItemSpinner> mRoomItemSpinners;
     private RoomAdapter mRoomAdapter;
     private int mRoomItemId;
     private String mRoomItemName;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    CreateReunionListener mCreateReunionListener;
 
     @BindView(R.id.edit_title_reu)
     public EditText reunionTitle;
@@ -57,15 +55,18 @@ public class CreateReunionDialog extends DialogFragment{
     public Spinner spinnerhour;
     @BindView(R.id.edit_title_mail)
     public EditText editMail;
+    @BindView(R.id.button_create_reunion)
+    Button mButtonCreateReunion;
 
-    @NonNull
+    public CreationReunionFragment() {
+        // Required empty public constructor
+    }
+
     @Override
-    public AlertDialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-
-        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-
-        View view = requireActivity().getLayoutInflater().inflate(R.layout.create_reunion_dialog,null ,false);
-        dialog.setTitle("Création d'une réunion");
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_creation_reunion, container, false);
 
         ButterKnife.bind(this,view);
 
@@ -83,28 +84,35 @@ public class CreateReunionDialog extends DialogFragment{
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               configureDialogCalendar();
-            }
-        });
+        mButton.setOnClickListener(v -> configureDialogCalendar());
 
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                String date = dayOfMonth + "/" + (month +1) + "/" + year;
-                mTextDate.setText(date);
-            }
+        mDateSetListener = (view1, year, month, dayOfMonth) -> {
+            String date = dayOfMonth + "/" + (month +1) + "/" + year;
+            mTextDate.setText(date);
         };
 
-        dialog.setPositiveButton( "Créer réunion", (dialog1, which) -> {
-            mCreateReunionListener.onPositiveclick(createReunion(view));
+        mButtonCreateReunion.setOnClickListener(v -> {
+            Reunion reunion = createReunion();
+            mCreateReunionListener.onCreateReunion(reunion);
         });
-        dialog.setNegativeButton("Annuler", (dialog12, which) -> mCreateReunionListener.onNegativeClick());
 
-        dialog.setView(view);
-        return dialog.create();
+        return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof CreateReunionListener){
+            mCreateReunionListener = (CreateReunionListener) context;
+        }else {
+            throw new RuntimeException(context.toString() + " must implemente interface");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCreateReunionListener = null;
     }
 
     private void initListSpinner(){
@@ -130,6 +138,7 @@ public class CreateReunionDialog extends DialogFragment{
     }
 
     private void configureDialogCalendar() {
+
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
@@ -142,19 +151,15 @@ public class CreateReunionDialog extends DialogFragment{
         dialogDate.show();
     }
 
-    public Reunion createReunion(View view){
-        Reunion reunion;
-
-        reunion = new Reunion(reunionTitle.getText().toString(),
+    private Reunion createReunion(){
+       return new Reunion(
+                reunionTitle.getText().toString(),
                 mRoomItemId,
                 mRoomItemName,
                 mTextDate.getText().toString(),
                 spinnerhour.getSelectedItem().toString(),
-                makeMailString(editMail.getText().toString()));
-
-        Log.i("ru", String.valueOf(reunion.getIdRoom()) + String.valueOf(reunion.getNameRoom()));
-
-       return reunion;
+                makeMailString(editMail.getText().toString())
+        );
     }
 
     private String makeMailString(String mail){
@@ -170,3 +175,13 @@ public class CreateReunionDialog extends DialogFragment{
     }
 
 }
+
+
+
+
+
+
+
+
+
+
