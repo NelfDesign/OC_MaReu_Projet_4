@@ -12,17 +12,27 @@ public class Reunion {
     private int idRoom;
     private String nameRoom;
     private String mDate;
+    private int dateInt;
     private String time;
     private String mMail;
 
     //constructor
-    public Reunion(String reunionObject, int idRoom, String nameRoom, String date, String time, String mail) {
+    public Reunion(String reunionObject, int idRoom, String nameRoom, String date, int dateInt, String time, String mail) {
         this.reunionObject = reunionObject;
         this.idRoom = idRoom;
         this.nameRoom = nameRoom;
-        mDate = date;
+        this.mDate = date;
+        this.dateInt = dateInt;
         this.time = time;
-        mMail = mail;
+        this.mMail = mail;
+    }
+
+    public int getDateInt() {
+        return dateInt;
+    }
+
+    public void setDateInt(int dateInt) {
+        this.dateInt = dateInt;
     }
 
     public String getTime() {

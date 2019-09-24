@@ -68,7 +68,7 @@
         android:id="@+id/linear_calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/title_time">
 
         <TextView
@@ -79,6 +79,14 @@
             tools:text="@string/app_name"
             app:layout_constraintTop_toBottomOf="@id/linear_calendar"
             app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/date_int"
+            style="@style/themetitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/linear_calendar"
+            android:visibility="invisible"/>
 
     </LinearLayout>
 

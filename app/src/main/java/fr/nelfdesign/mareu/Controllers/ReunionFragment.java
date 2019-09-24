@@ -73,16 +73,16 @@ public class ReunionFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mFloatingActionButton = view.findViewById((R.id.fab_add_reu));
 
-        initListAdapter();
+        initListAdapter(mReunions);
         configurFab();
         return view;
     }
 
-    private void initListAdapter() {
-        mReunions = ReunionListActivity.mReunionListService.getReunionList();
+    private void initListAdapter(List<Reunion> reunions) {
+        //mReunions = ReunionListActivity.mReunionListService.getReunionList();
 
-        mRecyclerView.setAdapter( new ReunionListAdapter(mReunions));
-        Log.i("reunion Fragment", String.valueOf(mReunions.size()));
+        mRecyclerView.setAdapter( new ReunionListAdapter(reunions));
+        Log.i("reunion Fragment", String.valueOf(reunions.size()));
     }
 
     private void configurFab(){
@@ -98,6 +98,22 @@ public class ReunionFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+
+            case R.id.action_filter_room: {
+                ArrayList<Reunion> reunion = ReunionListActivity.mReunionListService.filterPerRoom();
+                initListAdapter(reunion);
+                return true;
+            }
+
+            case R.id.action_filter_hour: {
+                ArrayList<Reunion> reunionDate = ReunionListActivity.mReunionListService.filterPerDate();
+                initListAdapter(reunionDate);
+                return true;
+            }
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

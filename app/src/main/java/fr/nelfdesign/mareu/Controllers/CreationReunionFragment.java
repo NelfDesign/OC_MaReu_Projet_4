@@ -51,6 +51,8 @@ public class CreationReunionFragment extends Fragment {
     public Button mButton;
     @BindView(R.id.date)
     public TextView mTextDate;
+    @BindView(R.id.date_int)
+    public TextView dateInt;
     @BindView(R.id.spinner_hour)
     public Spinner spinnerhour;
     @BindView(R.id.edit_title_mail)
@@ -98,6 +100,8 @@ public class CreationReunionFragment extends Fragment {
 
         mDateSetListener = (view1, year, month, dayOfMonth) -> {
             String date = dayOfMonth + "/" + (month +1) + "/" + year;
+            Integer intDate = dayOfMonth+(month+1)+year;
+            dateInt.setText(intDate.toString());
             mTextDate.setText(date);
         };
 
@@ -157,6 +161,7 @@ public class CreationReunionFragment extends Fragment {
                 mRoomItemId,
                 mRoomItemName,
                 mTextDate.getText().toString(),
+                Integer.parseInt(dateInt.getText().toString()),
                 spinnerhour.getSelectedItem().toString(),
                 makeMailString(editMail.getText().toString())
         );
