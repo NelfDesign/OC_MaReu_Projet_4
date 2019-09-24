@@ -36,6 +36,8 @@ public class ReunionListAdapter extends RecyclerView.Adapter<ReunionListAdapter.
 
         @BindView(R.id.image_salle)
         public ImageView mImageSalle;
+        @BindView(R.id.image_text)
+        public TextView mTextRoom;
         @BindView(R.id.text_reu)
         public TextView mTextReu;
         @BindView(R.id.date_reunion)
@@ -70,6 +72,7 @@ public class ReunionListAdapter extends RecyclerView.Adapter<ReunionListAdapter.
                 .apply(RequestOptions.circleCropTransform())
                 .into(viewHolder.mImageSalle);
 
+        viewHolder.mTextRoom.setText(reunion.getNameRoom());
         viewHolder.mTextReu.setText(reunion.getReunionObject());
         if (reunion.getDate() == null){
             return;

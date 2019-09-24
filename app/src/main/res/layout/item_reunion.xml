@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -15,9 +15,18 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@mipmap/logo"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/image_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/image_salle"
+            app:layout_constraintLeft_toLeftOf="@id/image_salle"
+            app:layout_constraintRight_toRightOf="@id/image_salle"
+            tools:text="salle 1"/>
 
         <TextView
             android:id="@+id/text_reu"
@@ -25,7 +34,7 @@
             android:layout_height="wrap_content"
             tools:text="Reunion"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:textSize="18sp"
             app:layout_constraintLeft_toRightOf="@+id/image_salle"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -38,7 +47,7 @@
             tools:text="17/09/19"
             app:layout_constraintTop_toTopOf="@id/text_reu"
             app:layout_constraintBottom_toBottomOf="@id/text_reu"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="5dp"
             android:textSize="18sp"/>
 
         <TextView
@@ -46,10 +55,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toRightOf="@+id/date_reunion"
-            tools:text="- 14h"
+            tools:text="à 14h"
             app:layout_constraintTop_toTopOf="@id/text_reu"
             app:layout_constraintBottom_toBottomOf="@id/text_reu"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="5dp"
             android:textSize="18sp"/>
 
         <TextView

@@ -63,6 +63,16 @@ public class CreationReunionFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof CreateReunionListener){
+            mCreateReunionListener = (CreateReunionListener) context;
+        }else {
+            throw new RuntimeException(context.toString() + " must implemente interface");
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -97,16 +107,6 @@ public class CreationReunionFragment extends Fragment {
         });
 
         return view;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof CreateReunionListener){
-            mCreateReunionListener = (CreateReunionListener) context;
-        }else {
-            throw new RuntimeException(context.toString() + " must implemente interface");
-        }
     }
 
     @Override

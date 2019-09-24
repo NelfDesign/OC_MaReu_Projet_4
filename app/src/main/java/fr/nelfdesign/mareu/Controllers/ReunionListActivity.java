@@ -22,10 +22,11 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reunion_list);
 
+        setSupportActionBar(findViewById(R.id.toolbar));
+
         mReunionListService = new ReunionListService();
         mReunionList = mReunionListService.getReunionList();
-        this.configureFragment();
-
+        configureFragment();
     }
 
     // CONFIGURATION ---
@@ -45,12 +46,18 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
 
     @Override
     public void onFabClicked() {
-        mCreationReunionFragment = new CreationReunionFragment();
+        if (mCreationReunionFragment == null && findViewById(R.id.framelayout_container_create) != null){
+            mCreationReunionFragment = new CreationReunionFragment();
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.framelayout_container, mCreationReunionFragment)
-                .addToBackStack(null)
-                .commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.framelayout_container_create, mCreationReunionFragment)
+                    .commit();
+        }else {
+            mCreationReunionFragment = new CreationReunionFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.framelayout_container, mCreationReunionFragment)
+                    .commit();
+        }
     }
 
     @Override
@@ -59,8 +66,17 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
         Log.i("reunion", mReunionList.get(0).getReunionObject());
         Log.i("reunion", String.valueOf(mReunionList.size()));
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.framelayout_container, mReunionFragment)
-                .commit();
+        if (mReunionFragment != null && findViewById(R.id.framelayout_container_create) != null){
+            mReunionFragment = new ReunionFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .remove(mCreationReunionFragment)
+                    .replace(R.id.framelayout_container, mReunionFragment)
+                    .commit();
+        }else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.framelayout_container, mReunionFragment)
+                    .commit();
+        }
+
     }
 }
