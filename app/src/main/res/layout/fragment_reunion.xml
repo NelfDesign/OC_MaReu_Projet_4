@@ -14,7 +14,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         tools:context=".Controllers.ReunionFragment"
-        tools:listitem="@layout/item_reunion" />
+        tools:listitem="@layout/item_reunion"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_add_reu"

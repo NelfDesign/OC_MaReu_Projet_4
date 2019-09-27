@@ -2,30 +2,26 @@ package fr.nelfdesign.mareu.Controllers;
 
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.nelfdesign.mareu.Models.Reunion;
-import fr.nelfdesign.mareu.Models.RoomItem;
 import fr.nelfdesign.mareu.Models.RoomItemSpinner;
 import fr.nelfdesign.mareu.R;
+import fr.nelfdesign.mareu.Utils.Utils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,11 +32,12 @@ public class CreationReunionFragment extends Fragment {
         void onCreateReunion(Reunion reunion);
     }
 
-    private ArrayList<RoomItemSpinner> mRoomItemSpinners;
     private RoomAdapter mRoomAdapter;
+    private RoomItemSpinner mRoomItemSpinner;
     private int mRoomItemId;
     private String mRoomItemName;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private TimePickerDialog.OnTimeSetListener mTimeSetListener;
     CreateReunionListener mCreateReunionListener;
 
     @BindView(R.id.edit_title_reu)
@@ -51,10 +48,10 @@ public class CreationReunionFragment extends Fragment {
     public Button mButton;
     @BindView(R.id.date)
     public TextView mTextDate;
+    @BindView(R.id.hour_text)
+    public TextView hourText;
     @BindView(R.id.date_int)
     public TextView dateInt;
-    @BindView(R.id.spinner_hour)
-    public Spinner spinnerhour;
     @BindView(R.id.edit_title_mail)
     public EditText editMail;
     @BindView(R.id.button_create_reunion)
@@ -82,27 +79,27 @@ public class CreationReunionFragment extends Fragment {
 
         ButterKnife.bind(this,view);
 
-        initRoomSpinner(view);
-        initHourSpinner(view);
+        Utils.initRoomSpinner(view, spinnerRoom);
+        Utils.getSpinnerValues(spinnerRoom);
 
-        spinnerRoom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                RoomItemSpinner roomItemSpinner = (RoomItemSpinner) spinnerRoom.getSelectedItem();
-                mRoomItemId = roomItemSpinner.getRoomImage();
-                mRoomItemName = roomItemSpinner.getRoomName();
+            public void onClick(View v) {
+                CreationReunionFragment.this.configureDialogTimer();
+                CreationReunionFragment.this.configureDialogCalendar();
             }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        mButton.setOnClickListener(v -> configureDialogCalendar());
-
         mDateSetListener = (view1, year, month, dayOfMonth) -> {
-            String date = dayOfMonth + "/" + (month +1) + "/" + year;
-            Integer intDate = dayOfMonth+(month+1)+year;
+            String date ="le " + dayOfMonth + "/" + (month + 1) + "/" + year;
+            Integer intDate = dayOfMonth + (month + 1) + year;
             dateInt.setText(intDate.toString());
             mTextDate.setText(date);
+        };
+
+        mTimeSetListener = (view12, hourOfDay, minute) -> {
+            String heure = " à " + hourOfDay + ":" + minute;
+            hourText.setText(heure);
         };
 
         mButtonCreateReunion.setOnClickListener(v -> {
@@ -119,27 +116,7 @@ public class CreationReunionFragment extends Fragment {
         mCreateReunionListener = null;
     }
 
-    private void initListSpinner(){
-        mRoomItemSpinners = new ArrayList<>();
 
-        for ( RoomItem item : RoomItem.values() ){
-            mRoomItemSpinners.add(new RoomItemSpinner(item.getIdDrawable(),item.getName()));
-        }
-    }
-
-    private void initRoomSpinner(View view){
-        final Spinner mSpinner = view.findViewById(R.id.spinner_room);
-        initListSpinner();
-        mRoomAdapter = new RoomAdapter(view.getContext(), mRoomItemSpinners);
-        mSpinner.setAdapter(mRoomAdapter);
-    }
-
-    private void initHourSpinner(View view){
-        String[] list = {"9h00", "10h00", "11h00", "12h00", "13h00", "14h00", "15h00", "16h00", "17h00", "18h00", "19h00"};
-        final Spinner mSpinner = view.findViewById(R.id.spinner_hour);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(),android.R.layout.simple_spinner_dropdown_item, list);
-        mSpinner.setAdapter(adapter);
-    }
 
     private void configureDialogCalendar() {
 
@@ -148,21 +125,39 @@ public class CreationReunionFragment extends Fragment {
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog dialogDate = new DatePickerDialog(getContext(),
-                android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener,
+        DatePickerDialog dialogDate = new DatePickerDialog(getContext(), mDateSetListener,
                 year, month, day);
-        dialogDate.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         dialogDate.show();
     }
 
+    private void configureDialogTimer() {
+
+        Calendar cal = Calendar.getInstance();
+        int hour = cal.get(Calendar.HOUR);
+        int minute = cal.get(Calendar.MINUTE);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), mTimeSetListener,
+                hour, minute, true);
+
+        timePickerDialog.show();
+    }
+
     private Reunion createReunion(){
+        int heure = 0;
+        if (dateInt.getText().toString() == ""){
+            heure = 0;
+        }else {
+            heure = Integer.parseInt(dateInt.getText().toString());
+        }
+
        return new Reunion(
                 reunionTitle.getText().toString(),
-                mRoomItemId,
-                mRoomItemName,
+                mRoomItemId = Utils.getSpinnerValues(spinnerRoom).getRoomImage(),
+                mRoomItemName = Utils.getSpinnerValues(spinnerRoom).getRoomName(),
                 mTextDate.getText().toString(),
-                Integer.parseInt(dateInt.getText().toString()),
-                spinnerhour.getSelectedItem().toString(),
+                heure,
+                hourText.getText().toString(),
                 makeMailString(editMail.getText().toString())
         );
     }

@@ -1,6 +1,7 @@
 package fr.nelfdesign.mareu.Controllers;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,13 +17,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.nelfdesign.mareu.Models.Reunion;
+import fr.nelfdesign.mareu.Models.RoomItemSpinner;
 import fr.nelfdesign.mareu.R;
 import fr.nelfdesign.mareu.Service.ReunionListService;
+import fr.nelfdesign.mareu.Utils.Utils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +43,7 @@ public class ReunionFragment extends Fragment {
     List<Reunion> mReunions;
     private FloatingActionButton mFloatingActionButton;
     fabListener mFabListener;
+    String itemName = "";
 
     public ReunionFragment() {}
 
@@ -79,8 +85,6 @@ public class ReunionFragment extends Fragment {
     }
 
     private void initListAdapter(List<Reunion> reunions) {
-        //mReunions = ReunionListActivity.mReunionListService.getReunionList();
-
         mRecyclerView.setAdapter( new ReunionListAdapter(reunions));
         Log.i("reunion Fragment", String.valueOf(reunions.size()));
     }
@@ -93,7 +97,7 @@ public class ReunionFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.reunion_menu, menu);
+        inflater.inflate(R.menu.menu_reunion, menu);
     }
 
     @Override
@@ -102,12 +106,11 @@ public class ReunionFragment extends Fragment {
         switch (item.getItemId()){
 
             case R.id.action_filter_room: {
-                ArrayList<Reunion> reunion = ReunionListActivity.mReunionListService.filterPerRoom();
-                initListAdapter(reunion);
+                configureAndShowAlertDialog();
                 return true;
             }
 
-            case R.id.action_filter_hour: {
+            case R.id.action_filter_date: {
                 ArrayList<Reunion> reunionDate = ReunionListActivity.mReunionListService.filterPerDate();
                 initListAdapter(reunionDate);
                 return true;
@@ -121,5 +124,29 @@ public class ReunionFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mFabListener = null;
+    }
+
+    private void configureAndShowAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.filter_list_dialog, null);
+
+        Spinner spinner = view.findViewById(R.id.spinner_choice);
+        Utils.initRoomSpinner(view, spinner);
+        Utils.getSpinnerValues(spinner);
+        itemName = Utils.getSpinnerValues(spinner).getRoomName();
+
+        builder.setTitle("Sélectionnez une valeur")
+                .setView(view)
+                .setPositiveButton("Filtrer",
+                        (dialog, which) -> {
+                            ArrayList<Reunion> reunion = ReunionListActivity
+                                    .mReunionListService.filterPerRoom(itemName);
+                            initListAdapter(reunion);
+                })
+                .setNegativeButton("Annuler",
+                        (dialog, which) -> {});
+
+        builder.create().show();
     }
 }

@@ -2,8 +2,7 @@
     <string name="app_name">MaReu</string>
     <string name="theme_de_la_reunion">Thème de la réunion :</string>
     <string name="choisissez_votre_salle">Choisissez votre salle</string>
-    <string name="choisissez_votre_date">Choisissez la date de la réunion</string>
-    <string name="choisissez_votre_heure">Choisissez l\'heure de la réunion</string>
+    <string name="choisissez_votre_date">Choisissez la date et l\'heure de la réunion</string>
     <string name="entrez_le_nom_des_participants">Entrez le prénom des participants séparés par une virgule :</string>
     <string name="title_creation_reunion">Création d\'une réunion</string>
 

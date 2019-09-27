@@ -34,11 +34,4 @@ public enum RoomItem {
         return name;
     }
 
-    public void setIdDrawable(int idDrawable) {
-        this.idDrawable = idDrawable;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

@@ -6,33 +6,45 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Controllers.CreationReunionFragment"
-    android:id="@+id/create_reunion_fragment">
+    android:id="@+id/create_reunion_fragment"
+    android:background="@color/colorPrimary">
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/theme_de_la_reunion"
         style="@style/themetitle"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <EditText
-        android:id="@+id/edit_title_reu"
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInput"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/title"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteX="31dp" />
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/edit_title_reu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Thème de la réunion"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_editor_absoluteX="31dp" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <TextView
         android:id="@+id/title_room"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/choisissez_votre_salle"
         style="@style/themetitle"
-        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/textInput"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <Spinner
@@ -40,36 +52,38 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:spinnerMode="dialog"
-        app:layout_constraintLeft_toRightOf="@+id/title_room"
-        app:layout_constraintTop_toBottomOf="@id/edit_title_reu"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_room"
         app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
         android:id="@+id/title_time"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/choisissez_votre_date"
         style="@style/themetitle"
-        app:layout_constraintTop_toBottomOf="@id/title_room"
+        app:layout_constraintTop_toBottomOf="@id/spinner_room"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <Button
         android:id="@+id/button"
-        android:layout_width="51dp"
-        android:layout_height="50dp"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:background="@drawable/ic_date_f"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintLeft_toRightOf="@+id/title_time"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_room" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_time" />
 
     <LinearLayout
         android:id="@+id/linear_calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/title_time">
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/button">
 
         <TextView
             android:id="@+id/date"
@@ -77,35 +91,26 @@
             android:layout_height="wrap_content"
             style="@style/themetitle"
             tools:text="@string/app_name"
-            app:layout_constraintTop_toBottomOf="@id/linear_calendar"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:id="@+id/hour_text"
+            style="@style/themetitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="heure"
+            android:layout_margin="10dp"
+            />
 
         <TextView
             android:id="@+id/date_int"
             style="@style/themetitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/linear_calendar"
-            android:visibility="invisible"/>
+            android:visibility="invisible"
+            />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/title_heure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/choisissez_votre_heure"
-        style="@style/themetitle"
-        app:layout_constraintTop_toBottomOf="@id/linear_calendar"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <Spinner
-        android:id="@+id/spinner_hour"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        app:layout_constraintLeft_toRightOf="@+id/title_heure"
-        app:layout_constraintTop_toBottomOf="@id/linear_calendar"
-        app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
         android:id="@+id/title_mail"
@@ -113,14 +118,16 @@
         android:layout_height="wrap_content"
         android:text="@string/entrez_le_nom_des_participants"
         style="@style/themetitle"
-        app:layout_constraintTop_toBottomOf="@id/title_heure"
+        app:layout_constraintTop_toBottomOf="@id/linear_calendar"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <EditText
         android:id="@+id/edit_title_mail"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="10dp"
+        android:hint="Marc, Pierre..."
         app:layout_constraintTop_toBottomOf="@+id/title_mail" />
 
     <Button
@@ -129,9 +136,13 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
+        android:padding="10dp"
         android:text="@string/cr_er_la_r_union"
-        android:textSize="18sp"
-        android:backgroundTint="@color/colorPrimary"/>
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:background="@drawable/border"
+        android:clickable="true"
+        android:focusable="true"/>
 
 </android.support.constraint.ConstraintLayout>

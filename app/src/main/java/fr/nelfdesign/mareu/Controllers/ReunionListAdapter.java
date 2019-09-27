@@ -79,7 +79,7 @@ public class ReunionListAdapter extends RecyclerView.Adapter<ReunionListAdapter.
         }else{
             viewHolder.mDate.setText(reunion.getDate());
         }
-        viewHolder.mHour.setText("- " + reunion.getTime());
+        viewHolder.mHour.setText(reunion.getTime());
 
         if (reunion.getMail() != null){
             if (reunion.getMail().length() < 30){

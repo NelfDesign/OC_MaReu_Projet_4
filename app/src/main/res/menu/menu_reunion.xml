@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_filter_room"
+        android:icon="@drawable/chaise_white_36dp"
+        android:title="@string/filtrer_par_salle"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/action_filter_date"
+        android:icon="@drawable/date_white_36dp"
+        app:showAsAction="ifRoom"
+        android:title="@string/filtrer_par_heure"/>
+
+</menu>
