@@ -6,13 +6,13 @@
         android:id="@+id/action_filter_room"
         android:icon="@drawable/chaise_white_36dp"
         android:title="@string/filtrer_par_salle"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         />
 
     <item
         android:id="@+id/action_filter_date"
         android:icon="@drawable/date_white_36dp"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         android:title="@string/filtrer_par_heure"/>
 
 </menu>

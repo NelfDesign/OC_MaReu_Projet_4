@@ -16,7 +16,5 @@ public interface ReunionApi {
 
      void deleteReunion(Reunion reunion);
 
-     ArrayList<Reunion> filterPerRoom(String text);
-
-     ArrayList<Reunion> filterPerDate();
+     ArrayList<Reunion> filter(String text);
 }

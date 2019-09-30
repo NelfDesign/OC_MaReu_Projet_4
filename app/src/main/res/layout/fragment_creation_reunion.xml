@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Controllers.CreationReunionFragment"
-    android:id="@+id/create_reunion_fragment"
-    android:background="@color/colorPrimary">
+    android:id="@+id/create_reunion_fragment">
 
     <TextView
         android:id="@+id/title"
@@ -23,7 +22,7 @@
         android:id="@+id/textInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/margin_normal"
         app:layout_constraintTop_toBottomOf="@+id/title">
 
         <android.support.design.widget.TextInputEditText
@@ -67,8 +66,8 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/ic_date_f"
         android:backgroundTint="@color/colorPrimaryDark"
         android:clickable="true"
@@ -91,7 +90,7 @@
             android:layout_height="wrap_content"
             style="@style/themetitle"
             tools:text="@string/app_name"
-            android:layout_margin="10dp"/>
+            android:layout_margin="@dimen/margin_normal"/>
 
         <TextView
             android:id="@+id/hour_text"
@@ -99,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="heure"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin_normal"
             />
 
         <TextView
@@ -121,13 +120,13 @@
         app:layout_constraintTop_toBottomOf="@id/linear_calendar"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <EditText
+    <android.support.design.widget.TextInputEditText
         android:id="@+id/edit_title_mail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_margin="10dp"
-        android:hint="Marc, Pierre..."
+        android:layout_margin="@dimen/margin_normal"
+        android:hint="@string/marc_pierre"
         app:layout_constraintTop_toBottomOf="@+id/title_mail" />
 
     <Button
@@ -136,10 +135,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="10dp"
-        android:padding="10dp"
+        android:layout_margin="@dimen/margin_moyen"
+        android:padding="@dimen/padding_normal"
         android:text="@string/cr_er_la_r_union"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_title"
         android:textColor="#fff"
         android:background="@drawable/border"
         android:clickable="true"

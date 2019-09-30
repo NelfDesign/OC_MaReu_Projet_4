@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/margin_normal">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +16,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@mipmap/logo"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/margin_normal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -33,9 +34,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Reunion"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:textSize="18sp"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:textSize="@dimen/text_title"
             app:layout_constraintLeft_toRightOf="@+id/image_salle"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -47,8 +48,8 @@
             tools:text="17/09/19"
             app:layout_constraintTop_toTopOf="@id/text_reu"
             app:layout_constraintBottom_toBottomOf="@id/text_reu"
-            android:layout_marginLeft="5dp"
-            android:textSize="18sp"/>
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:textSize="@dimen/text_moyen"/>
 
         <TextView
             android:id="@+id/hour_reunion"
@@ -58,8 +59,8 @@
             tools:text="à 14h"
             app:layout_constraintTop_toTopOf="@id/text_reu"
             app:layout_constraintBottom_toBottomOf="@id/text_reu"
-            android:layout_marginLeft="5dp"
-            android:textSize="18sp"/>
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:textSize="@dimen/text_moyen"/>
 
         <TextView
             android:id="@+id/text_mail"
@@ -74,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_delete_black_24dp"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin_moyen"
             android:background="@null"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>

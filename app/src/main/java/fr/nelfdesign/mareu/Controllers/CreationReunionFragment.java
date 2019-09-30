@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -80,7 +81,15 @@ public class CreationReunionFragment extends Fragment {
         ButterKnife.bind(this,view);
 
         Utils.initRoomSpinner(view, spinnerRoom);
-        Utils.getSpinnerValues(spinnerRoom);
+        spinnerRoom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mRoomItemSpinner = (RoomItemSpinner) spinnerRoom.getSelectedItem();
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +100,7 @@ public class CreationReunionFragment extends Fragment {
         });
 
         mDateSetListener = (view1, year, month, dayOfMonth) -> {
-            String date ="le " + dayOfMonth + "/" + (month + 1) + "/" + year;
+            String date = dayOfMonth + "/" + (month + 1) + "/" + year;
             Integer intDate = dayOfMonth + (month + 1) + year;
             dateInt.setText(intDate.toString());
             mTextDate.setText(date);
@@ -115,11 +124,8 @@ public class CreationReunionFragment extends Fragment {
         super.onDetach();
         mCreateReunionListener = null;
     }
-
-
-
+    // Method ***********************************************************
     private void configureDialogCalendar() {
-
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
@@ -153,8 +159,8 @@ public class CreationReunionFragment extends Fragment {
 
        return new Reunion(
                 reunionTitle.getText().toString(),
-                mRoomItemId = Utils.getSpinnerValues(spinnerRoom).getRoomImage(),
-                mRoomItemName = Utils.getSpinnerValues(spinnerRoom).getRoomName(),
+                mRoomItemId = mRoomItemSpinner.getRoomImage(),
+                mRoomItemName = mRoomItemSpinner.getRoomName(),
                 mTextDate.getText().toString(),
                 heure,
                 hourText.getText().toString(),

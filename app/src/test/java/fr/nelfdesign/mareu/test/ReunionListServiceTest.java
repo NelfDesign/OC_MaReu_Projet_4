@@ -4,15 +4,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.nelfdesign.mareu.Models.Reunion;
 import fr.nelfdesign.mareu.R;
-import fr.nelfdesign.mareu.Service.ReunionApi;
+import fr.nelfdesign.mareu.Service.ReunionListService;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 
 /**
  * Created by Nelfdesign at 26/09/2019
@@ -21,12 +21,7 @@ import static org.junit.Assert.assertThat;
 public class ReunionListServiceTest {
 
     //Field interface
-    private ReunionApi mReunionApi;
-    private List<Reunion> mReunionList = Arrays.asList(
-            new Reunion("reunion1", R.drawable.reunion,"salle 1","26/09/19",14,"14:00","marc"),
-            new Reunion("reunion2",R.drawable.reunion2,"salle 2","28/09/19",18,"10:00","marc,sophie"),
-            new Reunion("reunion3",R.drawable.reunion4,"salle 4","29/09/19",1,"09:00","marc")
-    );
+    private List<Reunion> mReunionList = new ReunionListService().getReunionList();
 
     @Before
     public void setUp() throws Exception {
@@ -38,22 +33,37 @@ public class ReunionListServiceTest {
 
     @Test
     public void getReunionList() {
+        assertEquals(3, mReunionList.size());
         assertNotNull(mReunionList.isEmpty());
     }
 
     @Test
-    public void addReunion() {
+    public void addReunionWithSuccess() {
+       Reunion r4 = new Reunion("reunion1", R.drawable.reunion,"salle 1",
+               "26/9/2019",14,"14:00","marc@lamzone.com");
+       mReunionList.add(r4);
+       assertEquals(4, mReunionList.size());
     }
 
     @Test
-    public void deleteReunion() {
+    public void deleteReunionWithSuccess() {
+        mReunionList.remove(0);
+        assertEquals(2,mReunionList.size());
     }
 
     @Test
-    public void filterPerRoom() {
+    public void filterWithSuccess() {
+        String text = "salle 4";
+        Reunion r4 = new Reunion("reunion1", R.drawable.reunion,"salle 4",
+                "26/9/2019",14,"14:00","marc@lamzone.com");
+        mReunionList.add(r4);
+        ArrayList<Reunion> reunionSorted = new ArrayList<>();
+        for (Reunion r : this.mReunionList) {
+            if (r.getNameRoom().equalsIgnoreCase(text)){
+                reunionSorted.add(r);
+            }
+        }
+        assertEquals(2,reunionSorted.size());
     }
 
-    @Test
-    public void filterPerDate() {
-    }
 }

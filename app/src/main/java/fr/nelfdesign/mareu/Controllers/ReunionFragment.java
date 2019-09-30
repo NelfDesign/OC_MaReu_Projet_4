@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,10 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import fr.nelfdesign.mareu.Models.Reunion;
 import fr.nelfdesign.mareu.Models.RoomItemSpinner;
@@ -55,18 +57,17 @@ public class ReunionFragment extends Fragment {
         }else {
             throw new RuntimeException(context.toString() + " must implemente interface");
         }
-
-         if ( ReunionListActivity.mReunionListService == null){
-             mReunionList = new ReunionListService();
-         }else{
-             mReunions = ReunionListActivity.mReunionListService.getReunionList();
-         }
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        if ( ReunionListActivity.mReunionListService == null){
+            mReunionList = new ReunionListService();
+        }else{
+            mReunions = ReunionListActivity.mReunionListService.getReunionList();
+        }
     }
 
     @Override
@@ -102,21 +103,16 @@ public class ReunionFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()){
-
             case R.id.action_filter_room: {
                 configureAndShowAlertDialog();
                 return true;
             }
-
             case R.id.action_filter_date: {
-                ArrayList<Reunion> reunionDate = ReunionListActivity.mReunionListService.filterPerDate();
-                initListAdapter(reunionDate);
+                configureAndShowAlertDate();
                 return true;
             }
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -133,17 +129,66 @@ public class ReunionFragment extends Fragment {
 
         Spinner spinner = view.findViewById(R.id.spinner_choice);
         Utils.initRoomSpinner(view, spinner);
-        Utils.getSpinnerValues(spinner);
-        itemName = Utils.getSpinnerValues(spinner).getRoomName();
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               RoomItemSpinner roomItemSpinner = (RoomItemSpinner) spinner.getSelectedItem();
+               itemName = roomItemSpinner.getRoomName();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         builder.setTitle("Sélectionnez une valeur")
                 .setView(view)
                 .setPositiveButton("Filtrer",
                         (dialog, which) -> {
                             ArrayList<Reunion> reunion = ReunionListActivity
-                                    .mReunionListService.filterPerRoom(itemName);
+                                    .mReunionListService.filter(itemName);
                             initListAdapter(reunion);
                 })
+                .setNegativeButton("Annuler",
+                        (dialog, which) -> {});
+
+        builder.create().show();
+    }
+
+    private void configureAndShowAlertDate(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.filter_list_dialog, null);
+
+        Spinner spinner = view.findViewById(R.id.spinner_choice);
+        List<String> arrayList = new ArrayList<>();
+        Set<String> set = new HashSet<>();
+        for (Reunion r : mReunions){
+            set.add(r.getDate());
+        }
+        for (String s : set){
+            arrayList.add(s);
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1, arrayList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                itemName = spinner.getSelectedItem().toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        builder.setTitle("Sélectionnez une valeur")
+                .setView(view)
+                .setPositiveButton("Filtrer",
+                        (dialog, which) -> {
+                            ArrayList<Reunion> reunion = ReunionListActivity
+                                    .mReunionListService.filter(itemName);
+                            initListAdapter(reunion);
+                        })
                 .setNegativeButton("Annuler",
                         (dialog, which) -> {});
 

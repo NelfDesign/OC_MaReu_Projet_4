@@ -9,7 +9,7 @@
         android:id="@+id/image_room"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/margin_moyen"
         android:src="@drawable/reunion" />
 
     <TextView
@@ -18,10 +18,10 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/image_room"
         android:layout_alignParentTop="true"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/margin_moyen"
         android:layout_toEndOf="@id/image_room"
         android:gravity="center"
-        android:textSize="18sp"
+        android:textSize="@dimen/text_title"
         tools:text="Salle 1" />
 
 </RelativeLayout>
