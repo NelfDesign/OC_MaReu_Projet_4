@@ -1,4 +1,4 @@
-package fr.nelfdesign.mareu.Controllers;
+package fr.nelfdesign.mareu.Controllers.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.util.Log;
 
 import java.util.List;
 
+import fr.nelfdesign.mareu.Controllers.Fragments.CreationReunionFragment;
+import fr.nelfdesign.mareu.Controllers.Fragments.ReunionFragment;
 import fr.nelfdesign.mareu.Models.Reunion;
 import fr.nelfdesign.mareu.R;
 import fr.nelfdesign.mareu.Service.ReunionListService;
@@ -14,7 +16,7 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
 
     private ReunionFragment mReunionFragment;
     private CreationReunionFragment mCreationReunionFragment;
-    static ReunionListService mReunionListService;
+    public static ReunionListService mReunionListService;
     List<Reunion> mReunionList;
 
     @Override
@@ -46,6 +48,7 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
 
     @Override
     public void onFabClicked() {
+        //config tablette
         if (mCreationReunionFragment == null && findViewById(R.id.framelayout_container_create) != null){
             mCreationReunionFragment = new CreationReunionFragment();
 
@@ -69,8 +72,8 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
         if (mReunionFragment != null && findViewById(R.id.framelayout_container_create) != null){
             mReunionFragment = new ReunionFragment();
             getSupportFragmentManager().beginTransaction()
-                    .remove(mCreationReunionFragment)
                     .replace(R.id.framelayout_container, mReunionFragment)
+                    .replace(R.id.framelayout_container_create, mCreationReunionFragment)
                     .commit();
         }else {
             getSupportFragmentManager().beginTransaction()

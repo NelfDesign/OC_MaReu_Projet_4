@@ -18,9 +18,9 @@ public class ReunionListService implements ReunionApi {
     private List<Reunion> mReunionList = generatorOfReunion();
 
     private static List<Reunion> mReunionListGenerate = Arrays.asList(
-            new Reunion("reunion1", R.drawable.reunion,"salle 1","26/9/2019",14,"14:00","marc@lamzone.com"),
-            new Reunion("reunion2",R.drawable.reunion2,"salle 2","28/9/2019",18,"10:00","marc@lamzone.com,sophie@lamzone.com"),
-            new Reunion("reunion3",R.drawable.reunion4,"salle 4","29/9/2019",1,"09:00","marc@lamzone.com")
+            new Reunion("reunion1", R.drawable.reunion,"salle 1","26/9/2019","14:00","marc@lamzone.com"),
+            new Reunion("reunion2",R.drawable.reunion2,"salle 2","28/9/2019","10:00","marc@lamzone.com,sophie@lamzone.com"),
+            new Reunion("reunion3",R.drawable.reunion4,"salle 4","29/9/2019","09:00","marc@lamzone.com")
     );
 
 
@@ -30,23 +30,23 @@ public class ReunionListService implements ReunionApi {
 
     @Override
     public List<Reunion> getReunionList() {
-        return this.mReunionList;
+        return mReunionList;
     }
 
     @Override
     public void addReunion(Reunion reunion){
-        this.mReunionList.add(reunion);
+        mReunionList.add(reunion);
     }
 
     @Override
     public void deleteReunion(Reunion reunion){
-        this.mReunionList.remove(reunion);
+        mReunionList.remove(reunion);
     }
 
     @Override
     public ArrayList<Reunion> filter(String text){
         ArrayList<Reunion> reunionSorted = new ArrayList<>();
-        for (Reunion r : this.mReunionList) {
+        for (Reunion r : mReunionList) {
             if (r.getNameRoom().equalsIgnoreCase(text) || r.getDate().equals(text)){
                 reunionSorted.add(r);
             }

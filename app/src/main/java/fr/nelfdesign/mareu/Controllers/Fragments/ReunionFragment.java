@@ -1,4 +1,4 @@
-package fr.nelfdesign.mareu.Controllers;
+package fr.nelfdesign.mareu.Controllers.Fragments;
 
 
 import android.app.AlertDialog;
@@ -25,6 +25,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import fr.nelfdesign.mareu.Controllers.Activity.ReunionListActivity;
+import fr.nelfdesign.mareu.Controllers.Adapters.ReunionListAdapter;
 import fr.nelfdesign.mareu.Models.Reunion;
 import fr.nelfdesign.mareu.Models.RoomItemSpinner;
 import fr.nelfdesign.mareu.R;
@@ -44,7 +46,7 @@ public class ReunionFragment extends Fragment {
     private ReunionListService mReunionList;
     List<Reunion> mReunions;
     private FloatingActionButton mFloatingActionButton;
-    fabListener mFabListener;
+    public fabListener mFabListener;
     String itemName = "";
 
     public ReunionFragment() {}
@@ -63,7 +65,7 @@ public class ReunionFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        if ( ReunionListActivity.mReunionListService == null){
+        if (ReunionListActivity.mReunionListService == null){
             mReunionList = new ReunionListService();
         }else{
             mReunions = ReunionListActivity.mReunionListService.getReunionList();
@@ -143,8 +145,7 @@ public class ReunionFragment extends Fragment {
                 .setView(view)
                 .setPositiveButton("Filtrer",
                         (dialog, which) -> {
-                            ArrayList<Reunion> reunion = ReunionListActivity
-                                    .mReunionListService.filter(itemName);
+                            ArrayList<Reunion> reunion = ReunionListActivity.mReunionListService.filter(itemName);
                             initListAdapter(reunion);
                 })
                 .setNegativeButton("Annuler",
@@ -159,14 +160,7 @@ public class ReunionFragment extends Fragment {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.filter_list_dialog, null);
 
         Spinner spinner = view.findViewById(R.id.spinner_choice);
-        List<String> arrayList = new ArrayList<>();
-        Set<String> set = new HashSet<>();
-        for (Reunion r : mReunions){
-            set.add(r.getDate());
-        }
-        for (String s : set){
-            arrayList.add(s);
-        }
+        List<String> arrayList= Utils.initSpinnerDate(mReunions);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1, arrayList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -185,8 +179,7 @@ public class ReunionFragment extends Fragment {
                 .setView(view)
                 .setPositiveButton("Filtrer",
                         (dialog, which) -> {
-                            ArrayList<Reunion> reunion = ReunionListActivity
-                                    .mReunionListService.filter(itemName);
+                            ArrayList<Reunion> reunion = ReunionListActivity.mReunionListService.filter(itemName);
                             initListAdapter(reunion);
                         })
                 .setNegativeButton("Annuler",

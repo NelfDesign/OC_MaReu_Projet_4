@@ -1,24 +1,28 @@
-package fr.nelfdesign.mareu.Controllers;
+package fr.nelfdesign.mareu.Controllers.Fragments;
 
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.nelfdesign.mareu.Controllers.Adapters.RoomAdapter;
 import fr.nelfdesign.mareu.Models.Reunion;
 import fr.nelfdesign.mareu.Models.RoomItemSpinner;
 import fr.nelfdesign.mareu.R;
@@ -51,8 +55,6 @@ public class CreationReunionFragment extends Fragment {
     public TextView mTextDate;
     @BindView(R.id.hour_text)
     public TextView hourText;
-    @BindView(R.id.date_int)
-    public TextView dateInt;
     @BindView(R.id.edit_title_mail)
     public EditText editMail;
     @BindView(R.id.button_create_reunion)
@@ -85,30 +87,29 @@ public class CreationReunionFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mRoomItemSpinner = (RoomItemSpinner) spinnerRoom.getSelectedItem();
-
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CreationReunionFragment.this.configureDialogTimer();
-                CreationReunionFragment.this.configureDialogCalendar();
-            }
+        mButton.setOnClickListener(v -> {
+            CreationReunionFragment.this.configureDialogTimer();
+            CreationReunionFragment.this.configureDialogCalendar();
         });
 
         mDateSetListener = (view1, year, month, dayOfMonth) -> {
             String date = dayOfMonth + "/" + (month + 1) + "/" + year;
-            Integer intDate = dayOfMonth + (month + 1) + year;
-            dateInt.setText(intDate.toString());
             mTextDate.setText(date);
         };
 
         mTimeSetListener = (view12, hourOfDay, minute) -> {
-            String heure = " à " + hourOfDay + ":" + minute;
-            hourText.setText(heure);
+            if (!checkHour(hourOfDay, minute)){
+                Snackbar.make(getView(), "Choisissez une heure comprise entre 9h et 19h.", Snackbar.LENGTH_SHORT).show();
+
+            }else {
+                String heure = hourOfDay + ":" + minute;
+                hourText.setText(heure);
+            }
         };
 
         mButtonCreateReunion.setOnClickListener(v -> {
@@ -133,7 +134,8 @@ public class CreationReunionFragment extends Fragment {
 
         DatePickerDialog dialogDate = new DatePickerDialog(getContext(), mDateSetListener,
                 year, month, day);
-
+        //block the calendar to current date
+        dialogDate.getDatePicker().setMinDate(System.currentTimeMillis());
         dialogDate.show();
     }
 
@@ -150,21 +152,19 @@ public class CreationReunionFragment extends Fragment {
     }
 
     private Reunion createReunion(){
-        int heure = 0;
-        if (dateInt.getText().toString() == ""){
-            heure = 0;
+        String str = "";
+        if (editMail.getText().toString().isEmpty()){
+            str = "";
         }else {
-            heure = Integer.parseInt(dateInt.getText().toString());
+            str = makeMailString(editMail.getText().toString());
         }
-
        return new Reunion(
                 reunionTitle.getText().toString(),
                 mRoomItemId = mRoomItemSpinner.getRoomImage(),
                 mRoomItemName = mRoomItemSpinner.getRoomName(),
                 mTextDate.getText().toString(),
-                heure,
                 hourText.getText().toString(),
-                makeMailString(editMail.getText().toString())
+                str
         );
     }
 
@@ -176,10 +176,16 @@ public class CreationReunionFragment extends Fragment {
             a += "@lamzone.com, ";
             str += a;
         }
-
         return str;
     }
 
+    private boolean checkHour(int hour, int minute){
+        if (hour < 9 || (hour >= 19 && minute >= 1)){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }
 
 

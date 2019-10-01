@@ -1,11 +1,16 @@
 package fr.nelfdesign.mareu.Utils;
 
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import fr.nelfdesign.mareu.Controllers.RoomAdapter;
+import fr.nelfdesign.mareu.Controllers.Adapters.RoomAdapter;
+import fr.nelfdesign.mareu.Models.Reunion;
 import fr.nelfdesign.mareu.Models.RoomItem;
 import fr.nelfdesign.mareu.Models.RoomItemSpinner;
 
@@ -30,6 +35,18 @@ public abstract class Utils {
         initListSpinner();
         RoomAdapter mRoomAdapter = new RoomAdapter(view.getContext(), mRoomItemSpinners);
         spinner.setAdapter(mRoomAdapter);
+    }
+
+    public static List<String> initSpinnerDate(List<Reunion> mReunions){
+        List<String> arrayList = new ArrayList<>();
+        Set<String> set = new HashSet<>();
+        for (Reunion r : mReunions){
+            set.add(r.getDate());
+        }
+        for (String s : set){
+            arrayList.add(s);
+        }
+        return arrayList;
     }
 
 }

@@ -13,10 +13,10 @@
         android:theme="@style/MaReuTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".Controllers.CreationReunionFragment"
+        <activity android:name=".Controllers.Fragments.CreationReunionFragment"
                     android:theme="@style/MaReuTheme.create"/>
 
-        <activity android:name=".Controllers.ReunionListActivity">
+        <activity android:name=".Controllers.Activity.ReunionListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
