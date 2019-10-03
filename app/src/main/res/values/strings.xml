@@ -12,4 +12,5 @@
     <string name="filtrer_par_heure">Filtrer par date</string>
     <string name="filtrer_par_salle">Filtrer par salle</string>
     <string name="marc_pierre">Marc, Pierre...</string>
+    <string name="filtrer">Filtrer</string>
 </resources>

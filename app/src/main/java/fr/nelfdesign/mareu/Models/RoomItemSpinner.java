@@ -1,5 +1,7 @@
 package fr.nelfdesign.mareu.Models;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Nelfdesign at 17/09/2019
  * fr.nelfdesign.mareu.Models
@@ -22,4 +24,9 @@ public class RoomItemSpinner {
         return roomImage;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return this.getRoomName();
+    }
 }

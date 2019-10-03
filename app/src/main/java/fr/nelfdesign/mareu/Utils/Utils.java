@@ -1,6 +1,5 @@
 package fr.nelfdesign.mareu.Utils;
 
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Spinner;
 
@@ -21,9 +20,8 @@ import fr.nelfdesign.mareu.Models.RoomItemSpinner;
 public abstract class Utils {
 
     private static ArrayList<RoomItemSpinner> mRoomItemSpinners;
-    private static RoomItemSpinner roomItemSpinner;
 
-    private static void initListSpinner(){
+    public static void initListSpinner(){
        mRoomItemSpinners = new ArrayList<>();
 
         for ( RoomItem item : RoomItem.values() ){
