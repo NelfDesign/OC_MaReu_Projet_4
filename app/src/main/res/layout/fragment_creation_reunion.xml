@@ -8,118 +8,215 @@
     tools:context=".Controllers.Fragments.CreationReunionFragment"
     android:id="@+id/create_reunion_fragment">
 
-    <TextView
-        android:id="@+id/title"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/theme_de_la_reunion"
-        style="@style/themetitle"
-        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        android:id="@+id/card_Theme"
+        android:layout_margin="@dimen/margin_normal">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_normal"
-        app:layout_constraintTop_toBottomOf="@+id/title">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/edit_title_reu"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Thème de la réunion"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            tools:layout_editor_absoluteX="31dp" />
+            android:layout_height="wrap_content">
 
-    </android.support.design.widget.TextInputLayout>
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/theme_de_la_reunion"
+                style="@style/themetitle"
+                android:gravity="center"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textInput"/>
 
-    <TextView
-        android:id="@+id/title_room"
+            <View
+                android:id="@+id/v_separator2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorAccent"
+                android:paddingStart="@dimen/padding_normal"
+                android:paddingEnd="@dimen/padding_normal"
+                android:layout_margin="@dimen/margin_normal"
+                app:layout_constraintTop_toBottomOf="@+id/title"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_normal"
+                app:layout_constraintTop_toBottomOf="@+id/v_separator2">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edit_title_reu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Thème de la réunion"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/choisissez_votre_salle"
-        style="@style/themetitle"
-        app:layout_constraintTop_toBottomOf="@id/textInput"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/card_Theme"
+        android:layout_margin="@dimen/margin_normal">
 
-    <Spinner
-        android:id="@+id/spinner_room"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:spinnerMode="dialog"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_room"
-        app:layout_constraintRight_toRightOf="parent"/>
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/title_time"
+            <TextView
+                android:id="@+id/title_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/choisissez_votre_salle"
+                style="@style/themetitle"
+                app:layout_constraintBottom_toTopOf="@+id/spinner_room"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <View
+                android:id="@+id/v_separator3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorAccent"
+                android:paddingStart="@dimen/padding_normal"
+                android:paddingEnd="@dimen/padding_normal"
+                android:layout_margin="@dimen/margin_normal"
+                app:layout_constraintTop_toBottomOf="@+id/title_room"/>
+
+            <Spinner
+                android:id="@+id/spinner_room"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:spinnerMode="dialog"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_separator3"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/Card_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/choisissez_votre_date"
-        style="@style/themetitle"
-        app:layout_constraintTop_toBottomOf="@id/spinner_room"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/card_spinner"
+        android:layout_margin="@dimen/margin_normal">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/ic_date_f"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_time" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/linear_calendar"
+            <TextView
+                android:id="@+id/title_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/choisissez_votre_date"
+                style="@style/themetitle"
+                app:layout_constraintBottom_toTopOf="@+id/button"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <View
+                android:id="@+id/v_separator4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorAccent"
+                android:paddingStart="@dimen/padding_normal"
+                android:paddingEnd="@dimen/padding_normal"
+                android:layout_margin="@dimen/margin_normal"
+                app:layout_constraintTop_toBottomOf="@+id/title_time"/>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ic_date_f"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/v_separator4" />
+
+            <LinearLayout
+                android:id="@+id/linear_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/button">
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/themetitle"
+                    tools:text="@string/app_name"
+                    android:layout_margin="@dimen/margin_normal"/>
+
+                <TextView
+                    android:id="@+id/hour_text"
+                    style="@style/themetitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="heure"
+                    android:layout_margin="@dimen/margin_normal"
+                    />
+
+            </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_mail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/button">
+        app:layout_constraintTop_toBottomOf="@+id/Card_time"
+        android:layout_margin="@dimen/margin_normal">
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/themetitle"
-            tools:text="@string/app_name"
-            android:layout_margin="@dimen/margin_normal"/>
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/hour_text"
-            style="@style/themetitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="heure"
-            android:layout_margin="@dimen/margin_normal"
-            />
+            <TextView
+                android:id="@+id/title_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/entrez_le_nom_des_participants"
+                style="@style/themetitle"
+                app:layout_constraintBottom_toTopOf="@+id/title_mail_input"
+                app:layout_constraintLeft_toLeftOf="parent"/>
 
-    </LinearLayout>
+            <View
+                android:id="@+id/v_separator5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorAccent"
+                android:paddingStart="@dimen/padding_normal"
+                android:paddingEnd="@dimen/padding_normal"
+                android:layout_margin="@dimen/margin_normal"
+                app:layout_constraintTop_toBottomOf="@+id/title_mail"/>
 
-    <TextView
-        android:id="@+id/title_mail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/entrez_le_nom_des_participants"
-        style="@style/themetitle"
-        app:layout_constraintTop_toBottomOf="@id/linear_calendar"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/title_mail_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/v_separator5"
+                app:layout_constraintLeft_toLeftOf="parent">
 
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/edit_title_mail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_margin="@dimen/margin_normal"
-        android:hint="@string/marc_pierre"
-        app:layout_constraintTop_toBottomOf="@+id/title_mail" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_title_mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_normal"
+                android:hint="@string/marc_pierre" />
+
+            </android.support.design.widget.TextInputLayout>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
 
     <Button
         android:id="@+id/button_create_reunion"

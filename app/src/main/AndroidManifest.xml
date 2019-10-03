@@ -14,6 +14,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name=".Controllers.Fragments.CreationReunionFragment"
+                    android:windowSoftInputMode="adjustResize"
                     android:theme="@style/MaReuTheme.create"/>
 
         <activity android:name=".Controllers.Activity.ReunionListActivity">

@@ -98,7 +98,15 @@ public class CreationReunionFragment extends Fragment {
         });
 
         mDateSetListener = (view1, year, month, dayOfMonth) -> {
-            String date = dayOfMonth + "/" + (month + 1) + "/" + year;
+            String day = String.valueOf(dayOfMonth);
+            String monthS = String.valueOf(month+1);
+            if (dayOfMonth < 10){
+                day = "0" + dayOfMonth;
+            }
+            if (month < 9){
+                monthS = "0" + (month+1);
+            }
+            String date = day + "/" + monthS + "/" + year;
             mTextDate.setText(date);
         };
 
@@ -107,7 +115,15 @@ public class CreationReunionFragment extends Fragment {
                 Snackbar.make(getView(), "Choisissez une heure comprise entre 9h et 19h.", Snackbar.LENGTH_SHORT).show();
 
             }else {
-                String heure = hourOfDay + ":" + minute;
+                String heureString = String.valueOf(hourOfDay);
+                String minuteString = String.valueOf(minute);
+                if (hourOfDay < 10){
+                    heureString = "0" + hourOfDay;
+                }
+                if (minute < 10){
+                    minuteString = "0" + minute;
+                }
+                String heure = heureString + ":" + minuteString;
                 hourText.setText(heure);
             }
         };
