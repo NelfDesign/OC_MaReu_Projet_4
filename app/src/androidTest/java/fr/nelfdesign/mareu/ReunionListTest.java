@@ -12,13 +12,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import fr.nelfdesign.mareu.Controllers.Activity.ReunionListActivity;
+import fr.nelfdesign.mareu.UI.Activity.ReunionListActivity;
 import fr.nelfdesign.mareu.UtilsTest.DeleteViewAction;
 import fr.nelfdesign.mareu.UtilsTest.RecyclerViewItemCountAssertion;
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
@@ -81,6 +82,8 @@ public class ReunionListTest {
     public void reunionList_clickOnCreateButton_addNewReunion(){
         onView(withId(R.id.reunion_list)).check(matches(isDisplayed()));
         onView(withId(R.id.fab_add_reu)).perform(click());
+        onView(withId(R.id.edit_title_reu)).perform(replaceText("reunion"));
+        onView(withId(R.id.edit_title_mail)).perform(replaceText("marc"));
         onView(withId(R.id.button_create_reunion)).perform(click());
 
         onView(withId(R.id.reunion_list)).check(RecyclerViewItemCountAssertion.withItemCount(ITEMS_COUNT +1));
@@ -109,7 +112,7 @@ public class ReunionListTest {
                 isDisplayed()));
 
         actionMenuItemView.perform(click());
-        // Create a ViewInteraction to on the fist item menu
+        // Create a ViewInteraction to click on the item menu
         ViewInteraction appCompatTextView = onView(allOf(withId(R.id.title),
                         withText("Filtrer par salle"),
                         childAtPosition(childAtPosition(withId(R.id.content), 1), 0),
@@ -123,14 +126,49 @@ public class ReunionListTest {
                         isDisplayed()));
 
         appCompatSpinner.perform(click());
-        //Click on the fouth position in the spinner list
+        //Click on the fourth position in the spinner list (salle 4)
         onData(anything()).inRoot(RootMatchers.isPlatformPopup()).atPosition(3).perform(click());
         //Create a ViewInteraction to click on the button to accept the filter choice
         ViewInteraction appCompatButton = onView(allOf(withId(android.R.id.button1), withText("Filtrer"),
                         childAtPosition(childAtPosition(withClassName(is("android.widget.ScrollView")), 0),
                                 3)));
         appCompatButton.perform(scrollTo(), click());
-        // then attent to show only the filtered list
+        // then attent to show only the filtered list with1 element
         onView(withId(R.id.reunion_list)).check(RecyclerViewItemCountAssertion.withItemCount(1));
+    }
+
+    @Test
+    public void reunionList_clickOnFilterDate_thenAttentFilterList(){
+        onView(withId(R.id.reunion_list)).check(matches(isDisplayed()));
+
+        //Create a ViewInteraction to click on the toolbar hamburger
+        ViewInteraction actionMenuItemView = onView(allOf(withContentDescription("Filtrer"),
+                childAtPosition(childAtPosition(withId(R.id.toolbar), 1), 0),
+                isDisplayed()));
+
+        actionMenuItemView.perform(click());
+        // Create a ViewInteraction to click on the item menu
+        ViewInteraction appCompatTextView = onView(allOf(withId(R.id.title),
+                withText("Filtrer par date"),
+                childAtPosition(childAtPosition(withId(R.id.content), 1), 0),
+                isDisplayed()));
+
+        appCompatTextView.perform(click());
+        //Create a ViewInteraction to click on the spinner
+        ViewInteraction appCompatSpinner = onView(allOf(withId(R.id.spinner_choice),
+                childAtPosition(allOf(withId(R.id.layout_spinner_filter),
+                        childAtPosition(withId(android.R.id.custom), 0)), 0),
+                isDisplayed()));
+
+        appCompatSpinner.perform(click());
+        //Click on the first position in the spinner list (28/09/19)
+        onData(anything()).inRoot(RootMatchers.isPlatformPopup()).atPosition(0).perform(click());
+        //Create a ViewInteraction to click on the button to accept the filter choice
+        ViewInteraction appCompatButton = onView(allOf(withId(android.R.id.button1), withText("Filtrer"),
+                childAtPosition(childAtPosition(withClassName(is("android.widget.ScrollView")), 0),
+                        3)));
+        appCompatButton.perform(scrollTo(), click());
+        // then attent to show only the filtered list with 2 reunion
+        onView(withId(R.id.reunion_list)).check(RecyclerViewItemCountAssertion.withItemCount(2));
     }
 }

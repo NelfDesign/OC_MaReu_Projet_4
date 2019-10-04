@@ -1,4 +1,4 @@
-package fr.nelfdesign.mareu.Controllers.Adapters;
+package fr.nelfdesign.mareu.UI.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

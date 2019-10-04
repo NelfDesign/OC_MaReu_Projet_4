@@ -1,6 +1,6 @@
-package fr.nelfdesign.mareu.Controllers.Fragments;
+package fr.nelfdesign.mareu.UI.Fragments;
 
-
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -21,12 +21,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import fr.nelfdesign.mareu.Controllers.Activity.ReunionListActivity;
-import fr.nelfdesign.mareu.Controllers.Adapters.ReunionListAdapter;
+import fr.nelfdesign.mareu.UI.Activity.ReunionListActivity;
+import fr.nelfdesign.mareu.UI.Adapters.ReunionListAdapter;
 import fr.nelfdesign.mareu.Models.Reunion;
 import fr.nelfdesign.mareu.Models.RoomItemSpinner;
 import fr.nelfdesign.mareu.R;
@@ -70,8 +68,10 @@ public class ReunionFragment extends Fragment {
         }else{
             mReunions = ReunionListActivity.mReunionListService.getReunionList();
         }
+
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,7 +81,10 @@ public class ReunionFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.reunion_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mFloatingActionButton = view.findViewById((R.id.fab_add_reu));
-
+        //hide the FAB on tablette
+        if (getResources().getConfiguration().screenWidthDp >= 600){
+            mFloatingActionButton.setVisibility(View.INVISIBLE);
+        }
         initListAdapter(mReunions);
         configurFab();
         return view;

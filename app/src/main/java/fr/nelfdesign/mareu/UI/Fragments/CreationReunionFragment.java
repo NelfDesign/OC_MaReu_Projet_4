@@ -1,4 +1,4 @@
-package fr.nelfdesign.mareu.Controllers.Fragments;
+package fr.nelfdesign.mareu.UI.Fragments;
 
 
 import android.app.DatePickerDialog;
@@ -12,17 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.time.LocalDate;
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.nelfdesign.mareu.Controllers.Adapters.RoomAdapter;
+import fr.nelfdesign.mareu.UI.Adapters.RoomAdapter;
 import fr.nelfdesign.mareu.Models.Reunion;
 import fr.nelfdesign.mareu.Models.RoomItemSpinner;
 import fr.nelfdesign.mareu.R;
@@ -113,7 +111,6 @@ public class CreationReunionFragment extends Fragment {
         mTimeSetListener = (view12, hourOfDay, minute) -> {
             if (!checkHour(hourOfDay, minute)){
                 Snackbar.make(getView(), "Choisissez une heure comprise entre 9h et 19h.", Snackbar.LENGTH_SHORT).show();
-
             }else {
                 String heureString = String.valueOf(hourOfDay);
                 String minuteString = String.valueOf(minute);
@@ -129,8 +126,12 @@ public class CreationReunionFragment extends Fragment {
         };
 
         mButtonCreateReunion.setOnClickListener(v -> {
-            Reunion reunion = createReunion();
-            mCreateReunionListener.onCreateReunion(reunion);
+            if (!checkInputText(reunionTitle) || !checkInputText(editMail)){
+                Snackbar.make(getView(), "You must write something.", Snackbar.LENGTH_SHORT).show();
+            }else {
+                Reunion reunion = createReunion();
+                mCreateReunionListener.onCreateReunion(reunion);
+            }
         });
 
         return view;
@@ -197,6 +198,14 @@ public class CreationReunionFragment extends Fragment {
 
     private boolean checkHour(int hour, int minute){
         if (hour < 9 || (hour >= 19 && minute >= 1)){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    private boolean checkInputText(EditText textView){
+        if (textView.getText().toString().equals("")){
             return false;
         }else {
             return true;

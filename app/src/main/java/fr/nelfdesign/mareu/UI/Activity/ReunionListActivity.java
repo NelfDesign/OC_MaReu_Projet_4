@@ -1,13 +1,12 @@
-package fr.nelfdesign.mareu.Controllers.Activity;
+package fr.nelfdesign.mareu.UI.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import java.util.List;
 
-import fr.nelfdesign.mareu.Controllers.Fragments.CreationReunionFragment;
-import fr.nelfdesign.mareu.Controllers.Fragments.ReunionFragment;
+import fr.nelfdesign.mareu.UI.Fragments.CreationReunionFragment;
+import fr.nelfdesign.mareu.UI.Fragments.ReunionFragment;
 import fr.nelfdesign.mareu.Models.Reunion;
 import fr.nelfdesign.mareu.R;
 import fr.nelfdesign.mareu.Service.ReunionListService;
@@ -29,6 +28,7 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
         mReunionListService = new ReunionListService();
         mReunionList = mReunionListService.getReunionList();
         configureFragment();
+
     }
 
     // CONFIGURATION ---
@@ -43,34 +43,32 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
                     .commit();
             mReunionFragment.mFabListener = this;
         }
+        //Mode tablette
+        if (mCreationReunionFragment == null && findViewById(R.id.framelayout_container_create) != null) {
+            mCreationReunionFragment = new CreationReunionFragment();
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.framelayout_container_create, mCreationReunionFragment)
+                    .commit();
+        }
         mReunionFragment.mFabListener = this;
     }
 
     @Override
     public void onFabClicked() {
-        //config tablette
-        if (mCreationReunionFragment == null && findViewById(R.id.framelayout_container_create) != null){
-            mCreationReunionFragment = new CreationReunionFragment();
-
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.framelayout_container_create, mCreationReunionFragment)
-                    .commit();
-        }else {
             mCreationReunionFragment = new CreationReunionFragment();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.framelayout_container, mCreationReunionFragment)
                     .commit();
-        }
     }
 
     @Override
     public void onCreateReunion(Reunion reunion) {
         mReunionListService.addReunion(reunion);
-        Log.i("reunion", mReunionList.get(0).getReunionObject());
-        Log.i("reunion", String.valueOf(mReunionList.size()));
 
         if (mReunionFragment != null && findViewById(R.id.framelayout_container_create) != null){
             mReunionFragment = new ReunionFragment();
+            mCreationReunionFragment = new CreationReunionFragment();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.framelayout_container, mReunionFragment)
                     .replace(R.id.framelayout_container_create, mCreationReunionFragment)
@@ -80,6 +78,5 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
                     .replace(R.id.framelayout_container, mReunionFragment)
                     .commit();
         }
-
     }
 }

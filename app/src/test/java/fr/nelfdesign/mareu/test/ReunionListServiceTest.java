@@ -29,7 +29,7 @@ public class ReunionListServiceTest {
     @Test
     public void addReunionWithSuccess() {
        Reunion r4 = new Reunion("reunion1", R.drawable.reunion,"salle 1",
-               "26/9/2019","14:00","marc@lamzone.com");
+               "26/09/2019","14:00","marc@lamzone.com");
        mReunionListService.addReunion(r4);
        assertEquals(4, mReunionList.size());
     }

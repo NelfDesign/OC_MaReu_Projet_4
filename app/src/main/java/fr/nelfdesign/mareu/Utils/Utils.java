@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import fr.nelfdesign.mareu.Controllers.Adapters.RoomAdapter;
+import fr.nelfdesign.mareu.UI.Adapters.RoomAdapter;
 import fr.nelfdesign.mareu.Models.Reunion;
 import fr.nelfdesign.mareu.Models.RoomItem;
 import fr.nelfdesign.mareu.Models.RoomItemSpinner;

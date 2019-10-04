@@ -18,7 +18,7 @@
                 android:id="@+id/action_filter_date"
                 android:icon="@drawable/date_white_36dp"
                 app:showAsAction="ifRoom"
-                android:title="@string/filtrer_par_heure"/>
+                android:title="@string/filtrer_par_date"/>
 
         </menu>
     </item>

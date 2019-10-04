@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/margin_normal"
         android:layout_marginRight="@dimen/margin_normal"
-        tools:context=".Controllers.Fragments.ReunionFragment"
+        tools:context=".UI.Fragments.ReunionFragment"
         tools:listitem="@layout/item_reunion"/>
 
     <android.support.design.widget.FloatingActionButton

@@ -2,8 +2,6 @@ package fr.nelfdesign.mareu.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import fr.nelfdesign.mareu.Models.Reunion;
@@ -18,9 +16,9 @@ public class ReunionListService implements ReunionApi {
     private List<Reunion> mReunionList = generatorOfReunion();
 
     private static List<Reunion> mReunionListGenerate = Arrays.asList(
-            new Reunion("reunion1", R.drawable.reunion,"salle 1","26/9/2019","14:00","marc@lamzone.com"),
-            new Reunion("reunion2",R.drawable.reunion2,"salle 2","28/9/2019","10:00","marc@lamzone.com,sophie@lamzone.com"),
-            new Reunion("reunion3",R.drawable.reunion4,"salle 4","29/9/2019","09:00","marc@lamzone.com")
+            new Reunion("reunion 1", R.drawable.reunion,"salle 1","26/09/2019","14:00","marc@lamzone.com"),
+            new Reunion("reunion 2",R.drawable.reunion2,"salle 2","28/09/2019","10:00","marc@lamzone.com,sophie@lamzone.com"),
+            new Reunion("reunion 3",R.drawable.reunion4,"salle 4","28/09/2019","09:00","marc@lamzone.com")
     );
 
 
