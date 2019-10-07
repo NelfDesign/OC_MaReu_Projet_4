@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/image_salle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/image_width"
+            android:layout_height="@dimen/image_height"
             android:src="@mipmap/logo"
             android:layout_margin="@dimen/margin_normal"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -68,6 +68,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/text_reu"
             app:layout_constraintLeft_toLeftOf="@+id/text_reu"
+            android:textSize="@dimen/text_moyen"
             tools:text="marc@lamzone.com"/>
 
         <ImageButton

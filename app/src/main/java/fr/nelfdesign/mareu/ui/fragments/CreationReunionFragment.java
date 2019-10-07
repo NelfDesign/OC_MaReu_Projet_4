@@ -1,4 +1,4 @@
-package fr.nelfdesign.mareu.UI.Fragments;
+package fr.nelfdesign.mareu.ui.fragments;
 
 
 import android.app.DatePickerDialog;
@@ -16,15 +16,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.nelfdesign.mareu.UI.Adapters.RoomAdapter;
-import fr.nelfdesign.mareu.Models.Reunion;
-import fr.nelfdesign.mareu.Models.RoomItemSpinner;
+import fr.nelfdesign.mareu.ui.adapters.RoomAdapter;
+import fr.nelfdesign.mareu.models.Reunion;
+import fr.nelfdesign.mareu.models.RoomItemSpinner;
 import fr.nelfdesign.mareu.R;
-import fr.nelfdesign.mareu.Utils.Utils;
+import fr.nelfdesign.mareu.utils.Utils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +45,8 @@ public class CreationReunionFragment extends Fragment {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
     CreateReunionListener mCreateReunionListener;
+    private String date;
+    private String hour;
 
     @BindView(R.id.edit_title_reu)
     public EditText reunionTitle;
@@ -80,6 +85,8 @@ public class CreationReunionFragment extends Fragment {
 
         ButterKnife.bind(this,view);
 
+
+
         Utils.initRoomSpinner(view, spinnerRoom);
         spinnerRoom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -95,6 +102,9 @@ public class CreationReunionFragment extends Fragment {
             CreationReunionFragment.this.configureDialogCalendar();
         });
 
+        mTextDate.setText(checkDate(date));
+        hourText.setText(checkHourNull(hour));
+
         mDateSetListener = (view1, year, month, dayOfMonth) -> {
             String day = String.valueOf(dayOfMonth);
             String monthS = String.valueOf(month+1);
@@ -104,7 +114,7 @@ public class CreationReunionFragment extends Fragment {
             if (month < 9){
                 monthS = "0" + (month+1);
             }
-            String date = day + "/" + monthS + "/" + year;
+            date = day + "/" + monthS + "/" + year;
             mTextDate.setText(date);
         };
 
@@ -120,13 +130,14 @@ public class CreationReunionFragment extends Fragment {
                 if (minute < 10){
                     minuteString = "0" + minute;
                 }
-                String heure = heureString + ":" + minuteString;
-                hourText.setText(heure);
+                hour= heureString + ":" + minuteString;
+                hourText.setText(hour);
             }
         };
 
         mButtonCreateReunion.setOnClickListener(v -> {
-            if (!checkInputText(reunionTitle) || !checkInputText(editMail)){
+            if (!checkInputText(reunionTitle) ||
+                    !checkInputText(editMail) ){
                 Snackbar.make(getView(), "You must write something.", Snackbar.LENGTH_SHORT).show();
             }else {
                 Reunion reunion = createReunion();
@@ -159,7 +170,7 @@ public class CreationReunionFragment extends Fragment {
     private void configureDialogTimer() {
 
         Calendar cal = Calendar.getInstance();
-        int hour = cal.get(Calendar.HOUR);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
         int minute = cal.get(Calendar.MINUTE);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), mTimeSetListener,
@@ -209,6 +220,27 @@ public class CreationReunionFragment extends Fragment {
             return false;
         }else {
             return true;
+        }
+    }
+
+    private String checkDate(String date){
+        if (date == null){
+            Date date1 = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
+            date = simpleDateFormat.format(date1);
+           return date;
+        }else {
+           return date;
+        }
+    }
+    private String checkHourNull(String hour){
+        if (hour == null){
+            Date date1 = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.FRENCH);
+            hour = simpleDateFormat.format(date1);
+            return hour;
+        }else {
+            return hour;
         }
     }
 }

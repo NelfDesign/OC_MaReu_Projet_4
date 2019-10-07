@@ -8,14 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- creation reunion theme. -->
+    <!-- theme creation -->
     <style name="MaReuTheme.create">
-        <item name="android:windowBackground">@color/background_create</item>
+        <item name="android:windowBackground">@color/colorWhite</item>
     </style>
 
     <!-- style text title -->
     <style name="themetitle">
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/text_title</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/padding_normal</item>

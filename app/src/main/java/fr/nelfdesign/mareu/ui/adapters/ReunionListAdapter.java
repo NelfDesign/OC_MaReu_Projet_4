@@ -1,4 +1,4 @@
-package fr.nelfdesign.mareu.UI.Adapters;
+package fr.nelfdesign.mareu.ui.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,10 +15,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.nelfdesign.mareu.UI.Activity.ReunionListActivity;
-import fr.nelfdesign.mareu.Models.Reunion;
+import fr.nelfdesign.mareu.ui.activity.ReunionListActivity;
+import fr.nelfdesign.mareu.models.Reunion;
 import fr.nelfdesign.mareu.R;
-import fr.nelfdesign.mareu.Service.ReunionListService;
+import fr.nelfdesign.mareu.service.ReunionListService;
 
 /**
  * Created by Nelfdesign at 15/09/2019

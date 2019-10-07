@@ -1,17 +1,18 @@
-package fr.nelfdesign.mareu.Utils;
+package fr.nelfdesign.mareu.utils;
 
 import android.view.View;
 import android.widget.Spinner;
+import android.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import fr.nelfdesign.mareu.UI.Adapters.RoomAdapter;
-import fr.nelfdesign.mareu.Models.Reunion;
-import fr.nelfdesign.mareu.Models.RoomItem;
-import fr.nelfdesign.mareu.Models.RoomItemSpinner;
+import fr.nelfdesign.mareu.ui.adapters.RoomAdapter;
+import fr.nelfdesign.mareu.models.Reunion;
+import fr.nelfdesign.mareu.models.RoomItem;
+import fr.nelfdesign.mareu.models.RoomItemSpinner;
 
 /**
  * Created by Nelfdesign at 27/09/2019
@@ -46,5 +47,4 @@ public abstract class Utils {
         }
         return arrayList;
     }
-
 }

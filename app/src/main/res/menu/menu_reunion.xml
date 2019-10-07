@@ -4,7 +4,7 @@
 
     <item
         android:icon="@drawable/icon_menu_hamburger"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         android:title="@string/filtrer">
 
         <menu>
@@ -19,6 +19,11 @@
                 android:icon="@drawable/date_white_36dp"
                 app:showAsAction="ifRoom"
                 android:title="@string/filtrer_par_date"/>
+
+            <item
+                android:id="@+id/action_no_filter"
+                app:showAsAction="ifRoom"
+                android:title="@string/no_filter"/>
 
         </menu>
     </item>

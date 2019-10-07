@@ -12,7 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import fr.nelfdesign.mareu.UI.Activity.ReunionListActivity;
+import fr.nelfdesign.mareu.ui.activity.ReunionListActivity;
 import fr.nelfdesign.mareu.UtilsTest.DeleteViewAction;
 import fr.nelfdesign.mareu.UtilsTest.RecyclerViewItemCountAssertion;
 

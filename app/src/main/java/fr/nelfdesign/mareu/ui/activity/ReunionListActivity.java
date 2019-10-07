@@ -1,15 +1,17 @@
-package fr.nelfdesign.mareu.UI.Activity;
+package fr.nelfdesign.mareu.ui.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import java.util.List;
 
-import fr.nelfdesign.mareu.UI.Fragments.CreationReunionFragment;
-import fr.nelfdesign.mareu.UI.Fragments.ReunionFragment;
-import fr.nelfdesign.mareu.Models.Reunion;
+import fr.nelfdesign.mareu.ui.fragments.CreationReunionFragment;
+import fr.nelfdesign.mareu.ui.fragments.ReunionFragment;
+import fr.nelfdesign.mareu.models.Reunion;
 import fr.nelfdesign.mareu.R;
-import fr.nelfdesign.mareu.Service.ReunionListService;
+import fr.nelfdesign.mareu.service.ReunionListService;
 
 public class ReunionListActivity extends AppCompatActivity implements ReunionFragment.fabListener, CreationReunionFragment.CreateReunionListener {
 
@@ -17,13 +19,22 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
     private CreationReunionFragment mCreationReunionFragment;
     public static ReunionListService mReunionListService;
     List<Reunion> mReunionList;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reunion_list);
 
-        setSupportActionBar(findViewById(R.id.toolbar));
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(v -> {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.framelayout_container, mReunionFragment)
+                    .commit();
+            configToolbar("MaReu", false);
+        });
 
         mReunionListService = new ReunionListService();
         mReunionList = mReunionListService.getReunionList();
@@ -60,6 +71,7 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.framelayout_container, mCreationReunionFragment)
                     .commit();
+            configToolbar("Création d'une réunion", true);
     }
 
     @Override
@@ -77,6 +89,13 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.framelayout_container, mReunionFragment)
                     .commit();
+            configToolbar("MaReu", false);
         }
+    }
+
+    private void configToolbar(String text, Boolean bool){
+        toolbar.setTitle(text);
+        getSupportActionBar().setDisplayShowHomeEnabled(bool);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(bool);
     }
 }

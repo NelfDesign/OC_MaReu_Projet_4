@@ -1,4 +1,4 @@
-package fr.nelfdesign.mareu.UI.Adapters;
+package fr.nelfdesign.mareu.ui.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import fr.nelfdesign.mareu.Models.RoomItemSpinner;
+import fr.nelfdesign.mareu.models.RoomItemSpinner;
 import fr.nelfdesign.mareu.R;
 
 /**

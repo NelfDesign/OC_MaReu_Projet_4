@@ -1,16 +1,15 @@
 <resources>
     <string name="app_name">MaReu</string>
     <string name="theme_de_la_reunion">Thème de la réunion :</string>
-    <string name="choisissez_votre_salle">Choisissez votre salle</string>
-    <string name="choisissez_votre_date">Choisissez la date et l\'heure de la réunion</string>
-    <string name="entrez_le_nom_des_participants">Entrez le prénom des participants séparés par une virgule :</string>
+    <string name="choisissez_votre_date">Date et heure de la réunion</string>
+    <string name="entrez_le_nom_des_participants">Prénom des participants séparés par une virgule :</string>
     <string name="title_creation_reunion">Création d\'une réunion</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cr_er_la_r_union">Créer la réunion</string>
     <string name="filtrer_par_date">Filtrer par date</string>
     <string name="filtrer_par_salle">Filtrer par salle</string>
     <string name="marc_pierre">Marc, Pierre...</string>
     <string name="filtrer">Filtrer</string>
+    <string name="no_filter">Liste des réunions</string>
+    <string name="salle">Salle : </string>
 </resources>

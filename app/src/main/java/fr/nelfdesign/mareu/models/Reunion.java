@@ -1,4 +1,4 @@
-package fr.nelfdesign.mareu.Models;
+package fr.nelfdesign.mareu.models;
 
 
 /**

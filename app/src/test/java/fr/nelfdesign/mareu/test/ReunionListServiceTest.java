@@ -5,9 +5,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.nelfdesign.mareu.Models.Reunion;
+import fr.nelfdesign.mareu.models.Reunion;
 import fr.nelfdesign.mareu.R;
-import fr.nelfdesign.mareu.Service.ReunionListService;
+import fr.nelfdesign.mareu.service.ReunionListService;
 
 import static org.junit.Assert.assertEquals;
 

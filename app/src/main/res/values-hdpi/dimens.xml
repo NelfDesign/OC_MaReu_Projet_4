@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- text apparence -->
+    <dimen name="text_title">16sp</dimen>
+    <dimen name="text_moyen">12sp</dimen>
+
+    <!-- padding and margin -->
+    <dimen name="padding_normal">2dip</dimen>
+    <dimen name="margin_normal">5dip</dimen>
+    <dimen name="margin_small">2dip</dimen>
+    <dimen name="margin_moyen">5dip</dimen>
+
+    <!-- image size -->
+    <dimen name="image_width">40dp</dimen>
+    <dimen name="image_height">@dimen/image_width</dimen>
+    <dimen name="image_spinner">30dp</dimen>
+    <dimen name="separator">200dp</dimen>
+
+</resources>

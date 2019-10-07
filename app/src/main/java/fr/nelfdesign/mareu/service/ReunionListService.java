@@ -1,10 +1,10 @@
-package fr.nelfdesign.mareu.Service;
+package fr.nelfdesign.mareu.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import fr.nelfdesign.mareu.Models.Reunion;
+import fr.nelfdesign.mareu.models.Reunion;
 import fr.nelfdesign.mareu.R;
 
 /**

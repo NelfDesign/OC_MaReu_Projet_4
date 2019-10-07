@@ -1,15 +1,15 @@
-package fr.nelfdesign.mareu.UI.Fragments;
+package fr.nelfdesign.mareu.ui.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,13 +23,13 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.nelfdesign.mareu.UI.Activity.ReunionListActivity;
-import fr.nelfdesign.mareu.UI.Adapters.ReunionListAdapter;
-import fr.nelfdesign.mareu.Models.Reunion;
-import fr.nelfdesign.mareu.Models.RoomItemSpinner;
+import fr.nelfdesign.mareu.ui.activity.ReunionListActivity;
+import fr.nelfdesign.mareu.ui.adapters.ReunionListAdapter;
+import fr.nelfdesign.mareu.models.Reunion;
+import fr.nelfdesign.mareu.models.RoomItemSpinner;
 import fr.nelfdesign.mareu.R;
-import fr.nelfdesign.mareu.Service.ReunionListService;
-import fr.nelfdesign.mareu.Utils.Utils;
+import fr.nelfdesign.mareu.service.ReunionListService;
+import fr.nelfdesign.mareu.utils.Utils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,7 +82,7 @@ public class ReunionFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mFloatingActionButton = view.findViewById((R.id.fab_add_reu));
         //hide the FAB on tablette
-        if (getResources().getConfiguration().screenWidthDp >= 600){
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
             mFloatingActionButton.setVisibility(View.INVISIBLE);
         }
         initListAdapter(mReunions);
@@ -92,7 +92,6 @@ public class ReunionFragment extends Fragment {
 
     private void initListAdapter(List<Reunion> reunions) {
         mRecyclerView.setAdapter( new ReunionListAdapter(reunions));
-        Log.i("reunion Fragment", String.valueOf(reunions.size()));
     }
 
     private void configurFab(){
@@ -115,6 +114,10 @@ public class ReunionFragment extends Fragment {
             }
             case R.id.action_filter_date: {
                 configureAndShowAlertDate();
+                return true;
+            }
+            case R.id.action_no_filter:{
+                initListAdapter(mReunions);
                 return true;
             }
         }
