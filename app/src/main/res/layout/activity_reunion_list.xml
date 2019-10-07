@@ -15,13 +15,13 @@
         android:minHeight="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:title="@string/app_name"
-        app:titleTextColor="#FFF"/>
+        app:titleTextColor="#FFF"
+        android:theme="@style/ToolbarTheme"/>
 
     <FrameLayout
         android:id="@+id/framelayout_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
-        android:background="#fce4fc"/>
+        android:layout_below="@id/toolbar"/>
 
 </RelativeLayout>

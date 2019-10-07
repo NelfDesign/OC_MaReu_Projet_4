@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -55,9 +54,9 @@ public class CreationReunionFragment extends Fragment {
     @BindView(R.id.button)
     public Button mButton;
     @BindView(R.id.date)
-    public TextView mTextDate;
+    public EditText mTextDate;
     @BindView(R.id.hour_text)
-    public TextView hourText;
+    public EditText hourText;
     @BindView(R.id.edit_title_mail)
     public EditText editMail;
     @BindView(R.id.button_create_reunion)
@@ -84,8 +83,6 @@ public class CreationReunionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_creation_reunion, container, false);
 
         ButterKnife.bind(this,view);
-
-
 
         Utils.initRoomSpinner(view, spinnerRoom);
         spinnerRoom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -138,7 +135,7 @@ public class CreationReunionFragment extends Fragment {
         mButtonCreateReunion.setOnClickListener(v -> {
             if (!checkInputText(reunionTitle) ||
                     !checkInputText(editMail) ){
-                Snackbar.make(getView(), "You must write something.", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(getView(), "You must write topic and name.", Snackbar.LENGTH_SHORT).show();
             }else {
                 Reunion reunion = createReunion();
                 mCreateReunionListener.onCreateReunion(reunion);

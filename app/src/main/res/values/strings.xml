@@ -8,7 +8,7 @@
     <string name="cr_er_la_r_union">Créer la réunion</string>
     <string name="filtrer_par_date">Filtrer par date</string>
     <string name="filtrer_par_salle">Filtrer par salle</string>
-    <string name="marc_pierre">Marc, Pierre...</string>
+    <string name="marc_pierre">Prénom des participants séparés par une virgule</string>
     <string name="filtrer">Filtrer</string>
     <string name="no_filter">Liste des réunions</string>
     <string name="salle">Salle : </string>

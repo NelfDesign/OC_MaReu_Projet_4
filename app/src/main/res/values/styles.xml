@@ -13,12 +13,25 @@
         <item name="android:windowBackground">@color/colorWhite</item>
     </style>
 
+    <!-- TOOLBAR THEME -->
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- Color of the title text in the Toolbar -->
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+    </style>
+
     <!-- style text title -->
     <style name="themetitle">
         <item name="android:textSize">@dimen/text_title</item>
-        <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/padding_normal</item>
         <item name="android:layout_marginBottom">@dimen/margin_normal</item>
+    </style>
+
+    <!-- Spinner style. -->
+    <style name="Spinner" parent="@style/TextAppearance.AppCompat">
+        <item name="android:background">@drawable/spinner</item>
+        <item name="android:backgroundTint">@color/colorAccent</item>
+        <item name="android:padding">@dimen/padding_normal</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
 </resources>
