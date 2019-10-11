@@ -1,17 +1,16 @@
 package fr.nelfdesign.mareu.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import java.util.List;
 
+import fr.nelfdesign.mareu.R;
+import fr.nelfdesign.mareu.models.Reunion;
+import fr.nelfdesign.mareu.service.ReunionListService;
 import fr.nelfdesign.mareu.ui.fragments.CreationReunionFragment;
 import fr.nelfdesign.mareu.ui.fragments.ReunionFragment;
-import fr.nelfdesign.mareu.models.Reunion;
-import fr.nelfdesign.mareu.R;
-import fr.nelfdesign.mareu.service.ReunionListService;
 
 public class ReunionListActivity extends AppCompatActivity implements ReunionFragment.fabListener, CreationReunionFragment.CreateReunionListener {
 
@@ -38,7 +37,7 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
 
         mReunionListService = new ReunionListService();
         mReunionList = mReunionListService.getReunionList();
-        configureFragment();
+        this.configureFragment();
 
     }
 
@@ -77,7 +76,7 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
     @Override
     public void onCreateReunion(Reunion reunion) {
         mReunionListService.addReunion(reunion);
-
+        // mode landscape
         if (mReunionFragment != null && findViewById(R.id.framelayout_container_create) != null){
             mReunionFragment = new ReunionFragment();
             mCreationReunionFragment = new CreationReunionFragment();
@@ -86,6 +85,7 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
                     .replace(R.id.framelayout_container_create, mCreationReunionFragment)
                     .commit();
         }else {
+            //mode normal
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.framelayout_container, mReunionFragment)
                     .commit();
@@ -98,4 +98,5 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
         getSupportActionBar().setDisplayShowHomeEnabled(bool);
         getSupportActionBar().setDisplayHomeAsUpEnabled(bool);
     }
+
 }
