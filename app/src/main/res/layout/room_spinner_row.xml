@@ -9,7 +9,7 @@
         android:id="@+id/image_room"
         android:layout_width="@dimen/image_spinner"
         android:layout_height="@dimen/image_spinner"
-        android:layout_margin="@dimen/margin_moyen"
+        android:layout_marginLeft="@dimen/margin_moyen"
         android:src="@drawable/reunion" />
 
     <TextView
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/image_room"
         android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/margin_moyen"
+        android:layout_marginLeft="@dimen/margin_moyen"
         android:layout_toEndOf="@id/image_room"
         android:gravity="center"
         android:textSize="@dimen/text_title"

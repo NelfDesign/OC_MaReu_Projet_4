@@ -9,7 +9,8 @@
 
     <Spinner
         android:id="@+id/spinner_choice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="@dimen/spinner"
+        android:layout_height="wrap_content"
+        style="@style/Spinner"/>
 
 </LinearLayout>

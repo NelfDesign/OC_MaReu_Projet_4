@@ -12,9 +12,10 @@
     <dimen name="margin_moyen">10dip</dimen>
 
     <!-- image size -->
-    <dimen name="image_width">40dp</dimen>
-    <dimen name="image_height">@dimen/image_width</dimen>
+    <dimen name="image_width">30dp</dimen>
+    <dimen name="image_height">20dp</dimen>
     <dimen name="image_spinner">40dp</dimen>
     <dimen name="separator">250dp</dimen>
+    <dimen name="spinner">150dp</dimen>
 
 </resources>

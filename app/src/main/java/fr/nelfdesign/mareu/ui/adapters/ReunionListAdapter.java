@@ -70,7 +70,6 @@ public class ReunionListAdapter extends RecyclerView.Adapter<ReunionListAdapter.
 
         Glide.with(viewHolder.mImageSalle.getContext())
                 .load(reunion.getIdRoom())
-                .apply(RequestOptions.circleCropTransform())
                 .into(viewHolder.mImageSalle);
 
         viewHolder.mTextRoom.setText(reunion.getNameRoom());

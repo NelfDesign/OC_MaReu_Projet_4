@@ -15,8 +15,8 @@
             android:id="@+id/image_salle"
             android:layout_width="@dimen/image_width"
             android:layout_height="@dimen/image_height"
-            android:src="@mipmap/logo"
-            android:layout_margin="@dimen/margin_normal"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/reunion2"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -24,62 +24,65 @@
             android:id="@+id/image_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/image_salle"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@id/image_salle"
             app:layout_constraintRight_toRightOf="@id/image_salle"
-            tools:text="salle 1"/>
+            app:layout_constraintTop_toBottomOf="@id/image_salle"
+            tools:text="salle 1" />
 
         <TextView
             android:id="@+id/text_reu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Reunion"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_margin="@dimen/margin_normal"
             android:textSize="@dimen/text_title"
             app:layout_constraintLeft_toRightOf="@+id/image_salle"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="@+id/image_salle"
+            tools:text="Reunion" />
 
         <TextView
             android:id="@+id/date_reunion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@+id/text_reu"
-            tools:text="17/09/19"
-            app:layout_constraintTop_toTopOf="@id/text_reu"
-            app:layout_constraintBottom_toBottomOf="@id/text_reu"
             android:layout_marginLeft="@dimen/margin_normal"
-            android:textSize="@dimen/text_moyen"/>
+            android:textSize="@dimen/text_moyen"
+            app:layout_constraintBottom_toBottomOf="@id/text_reu"
+            app:layout_constraintLeft_toRightOf="@+id/text_reu"
+            app:layout_constraintTop_toTopOf="@id/text_reu"
+            tools:text="17/09/19" />
 
         <TextView
             android:id="@+id/hour_reunion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toRightOf="@+id/date_reunion"
-            tools:text="à 14h"
-            app:layout_constraintTop_toTopOf="@id/text_reu"
-            app:layout_constraintBottom_toBottomOf="@id/text_reu"
             android:layout_marginLeft="@dimen/margin_normal"
-            android:textSize="@dimen/text_moyen"/>
+            android:textSize="@dimen/text_moyen"
+            app:layout_constraintBottom_toBottomOf="@id/text_reu"
+            app:layout_constraintLeft_toRightOf="@+id/date_reunion"
+            app:layout_constraintTop_toTopOf="@id/text_reu"
+            tools:text="à 14h" />
 
         <TextView
             android:id="@+id/text_mail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/text_reu"
-            app:layout_constraintLeft_toLeftOf="@+id/text_reu"
+            android:layout_marginTop="@dimen/margin_moyen"
             android:textSize="@dimen/text_moyen"
-            tools:text="marc@lamzone.com"/>
+            app:layout_constraintLeft_toLeftOf="@+id/text_reu"
+            app:layout_constraintStart_toStartOf="@+id/text_reu"
+            app:layout_constraintTop_toBottomOf="@+id/text_reu"
+            tools:text="marc@lamzone.com" />
 
         <ImageButton
             android:id="@+id/icon_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_delete_black_24dp"
             android:layout_margin="@dimen/margin_moyen"
             android:background="@null"
+            android:src="@drawable/ic_delete_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

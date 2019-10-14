@@ -25,6 +25,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
 
+        <View
+            android:id="@+id/separator"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:paddingStart="@dimen/padding_normal"
+            android:paddingEnd="@dimen/margin_normal" />
+
         <FrameLayout
             android:id="@+id/framelayout_container_create"
             android:layout_width="0dp"

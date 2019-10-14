@@ -2,8 +2,8 @@
 <resources>
 
     <!-- text apparence -->
-    <dimen name="text_title">28sp</dimen>
-    <dimen name="text_moyen">20sp</dimen>
+    <dimen name="text_title">36sp</dimen>
+    <dimen name="text_moyen">24sp</dimen>
 
     <!-- padding and margin -->
     <dimen name="padding_normal">5dip</dimen>
@@ -13,8 +13,9 @@
 
     <!-- image size -->
     <dimen name="image_width">80dp</dimen>
-    <dimen name="image_height">@dimen/image_width</dimen>
-    <dimen name="image_spinner">60dp</dimen>
+    <dimen name="image_height">70dp</dimen>
+    <dimen name="image_spinner">80dp</dimen>
     <dimen name="separator">450dp</dimen>
+    <dimen name="spinner">350dp</dimen>
 
 </resources>

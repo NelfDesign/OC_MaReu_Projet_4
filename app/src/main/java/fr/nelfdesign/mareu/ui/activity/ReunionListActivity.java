@@ -38,32 +38,38 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
         mReunionListService = new ReunionListService();
         mReunionList = mReunionListService.getReunionList();
         this.configureFragment();
-
     }
 
-    // CONFIGURATION ---
+    // CONFIGURATION ----------------------------------------------------------------------
     private void configureFragment() {
-        mReunionFragment = (ReunionFragment) getSupportFragmentManager().findFragmentById(R.id.framelayout_container);
+        mReunionFragment = (ReunionFragment) getSupportFragmentManager().findFragmentById(R.id.reunion_list);
 
         if (mReunionFragment == null) {
             mReunionFragment = new ReunionFragment();
-
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.framelayout_container, mReunionFragment)
+                    .replace(R.id.framelayout_container, mReunionFragment)
                     .commit();
             mReunionFragment.mFabListener = this;
+
         }
         //Mode tablette
         if (mCreationReunionFragment == null && findViewById(R.id.framelayout_container_create) != null) {
             mCreationReunionFragment = new CreationReunionFragment();
 
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.framelayout_container_create, mCreationReunionFragment)
+                    .add(R.id.framelayout_container_create, mCreationReunionFragment)
                     .commit();
         }
         mReunionFragment.mFabListener = this;
     }
 
+    private void configToolbar(String text, Boolean bool){
+        toolbar.setTitle(text);
+        getSupportActionBar().setDisplayShowHomeEnabled(bool);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(bool);
+    }
+
+    //listener method ----------------------------------------------------------------------------
     @Override
     public void onFabClicked() {
             mCreationReunionFragment = new CreationReunionFragment();
@@ -91,12 +97,6 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
                     .commit();
             configToolbar("MaReu", false);
         }
-    }
-
-    private void configToolbar(String text, Boolean bool){
-        toolbar.setTitle(text);
-        getSupportActionBar().setDisplayShowHomeEnabled(bool);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(bool);
     }
 
 }

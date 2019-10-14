@@ -68,23 +68,26 @@ public class ReunionFragment extends Fragment {
         }else{
             mReunions = ReunionListActivity.mReunionListService.getReunionList();
         }
-
     }
 
     @SuppressLint("RestrictedApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_reunion, container, false);
 
         mRecyclerView = view.findViewById(R.id.reunion_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mFloatingActionButton = view.findViewById((R.id.fab_add_reu));
+
         //hide the FAB on tablette
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-            mFloatingActionButton.setVisibility(View.INVISIBLE);
+        if (getResources().getConfiguration().screenWidthDp > 600 &&
+                getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            mFloatingActionButton.setVisibility(View.GONE);
         }
+
         initListAdapter(mReunions);
         configurFab();
         return view;

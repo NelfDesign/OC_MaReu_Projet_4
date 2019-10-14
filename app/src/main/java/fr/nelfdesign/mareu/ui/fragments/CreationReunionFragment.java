@@ -37,13 +37,10 @@ public class CreationReunionFragment extends Fragment {
         void onCreateReunion(Reunion reunion);
     }
 
-    private RoomAdapter mRoomAdapter;
     private RoomItemSpinner mRoomItemSpinner;
-    private int mRoomItemId;
-    private String mRoomItemName;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog.OnTimeSetListener mTimeSetListener;
-    CreateReunionListener mCreateReunionListener;
+    public CreateReunionListener mCreateReunionListener;
     private String date;
     private String hour;
 
@@ -69,8 +66,8 @@ public class CreationReunionFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof CreateReunionListener){
-            mCreateReunionListener = (CreateReunionListener) context;
+        if (context instanceof CreationReunionFragment.CreateReunionListener){
+            mCreateReunionListener = (CreationReunionFragment.CreateReunionListener) context;
         }else {
             throw new RuntimeException(context.toString() + " must implemente interface");
         }
@@ -147,9 +144,10 @@ public class CreationReunionFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        super.onDetach();
         mCreateReunionListener = null;
+        super.onDetach();
     }
+
     // Method ***********************************************************
     private void configureDialogCalendar() {
         Calendar cal = Calendar.getInstance();
@@ -185,8 +183,8 @@ public class CreationReunionFragment extends Fragment {
         }
        return new Reunion(
                 reunionTitle.getText().toString(),
-                mRoomItemId = mRoomItemSpinner.getRoomImage(),
-                mRoomItemName = mRoomItemSpinner.getRoomName(),
+                mRoomItemSpinner.getRoomImage(),
+                mRoomItemSpinner.getRoomName(),
                 mTextDate.getText().toString(),
                 hourText.getText().toString(),
                 str

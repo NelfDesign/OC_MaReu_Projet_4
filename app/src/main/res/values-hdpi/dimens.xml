@@ -13,8 +13,9 @@
 
     <!-- image size -->
     <dimen name="image_width">40dp</dimen>
-    <dimen name="image_height">@dimen/image_width</dimen>
+    <dimen name="image_height">30dp</dimen>
     <dimen name="image_spinner">30dp</dimen>
     <dimen name="separator">200dp</dimen>
+    <dimen name="spinner">200dp</dimen>
 
 </resources>
