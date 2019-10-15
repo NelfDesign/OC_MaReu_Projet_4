@@ -10,6 +10,6 @@ This is a project for organize your meeting.It's a POC.
   - You can run the app on a real device or an emulator
 
 ## Librairies
-  - ButterKniffe
+  - ButterKnife
   - Glide
   - Jacoco
