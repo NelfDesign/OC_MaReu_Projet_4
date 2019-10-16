@@ -22,6 +22,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.nelfdesign.mareu.ui.activity.ReunionListActivity;
 import fr.nelfdesign.mareu.ui.adapters.RoomAdapter;
 import fr.nelfdesign.mareu.models.Reunion;
 import fr.nelfdesign.mareu.models.RoomItemSpinner;
@@ -133,7 +134,16 @@ public class CreationReunionFragment extends Fragment {
             if (!checkInputText(reunionTitle) ||
                     !checkInputText(editMail) ){
                 Snackbar.make(getView(), "You must write topic and name.", Snackbar.LENGTH_SHORT).show();
-            }else {
+
+            }else if(!Utils.checkRoomAndDate(mRoomItemSpinner.getRoomName(),
+                    mTextDate.getText().toString(),
+                    hourText.getText().toString(),
+                    ReunionListActivity.mReunionListService.getReunionList())){
+                Snackbar.make(this.getView(),
+                        "Select a new date for the mmeting in the room " + mRoomItemSpinner.getRoomName(),
+                        Snackbar.LENGTH_SHORT).show();
+
+            }else{
                 Reunion reunion = createReunion();
                 mCreateReunionListener.onCreateReunion(reunion);
             }

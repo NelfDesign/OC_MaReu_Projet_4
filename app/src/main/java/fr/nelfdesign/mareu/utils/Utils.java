@@ -1,5 +1,6 @@
 package fr.nelfdesign.mareu.utils;
 
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toolbar;
@@ -46,5 +47,14 @@ public abstract class Utils {
             arrayList.add(s);
         }
         return arrayList;
+    }
+
+    public static boolean checkRoomAndDate(String room, String date,String hour, List<Reunion> reunions){
+        for (Reunion r : reunions){
+            if (room.equals(r.getNameRoom()) && date.equalsIgnoreCase(r.getDate()) && hour.equalsIgnoreCase(r.getTime())){
+                return false;
+            }
+        }
+        return true;
     }
 }
