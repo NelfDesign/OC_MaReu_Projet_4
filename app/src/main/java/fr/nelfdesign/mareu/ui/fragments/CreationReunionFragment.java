@@ -15,19 +15,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.nelfdesign.mareu.ui.activity.ReunionListActivity;
-import fr.nelfdesign.mareu.ui.adapters.RoomAdapter;
 import fr.nelfdesign.mareu.models.Reunion;
 import fr.nelfdesign.mareu.models.RoomItemSpinner;
 import fr.nelfdesign.mareu.R;
 import fr.nelfdesign.mareu.utils.Utils;
+
+import static fr.nelfdesign.mareu.utils.Utils.checkDate;
+import static fr.nelfdesign.mareu.utils.Utils.checkHour;
+import static fr.nelfdesign.mareu.utils.Utils.checkHourNull;
+import static fr.nelfdesign.mareu.utils.Utils.checkInputText;
+import static fr.nelfdesign.mareu.utils.Utils.checkRoomAndDate;
+import static fr.nelfdesign.mareu.utils.Utils.makeMailString;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -115,7 +118,7 @@ public class CreationReunionFragment extends Fragment {
 
         mTimeSetListener = (view12, hourOfDay, minute) -> {
             if (!checkHour(hourOfDay, minute)){
-                Snackbar.make(getView(), "Choisissez une heure comprise entre 9h et 19h.", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(getView(), "Choose a time between 9h and 19h.", Snackbar.LENGTH_LONG).show();
             }else {
                 String heureString = String.valueOf(hourOfDay);
                 String minuteString = String.valueOf(minute);
@@ -135,13 +138,13 @@ public class CreationReunionFragment extends Fragment {
                     !checkInputText(editMail) ){
                 Snackbar.make(getView(), "You must write topic and name.", Snackbar.LENGTH_SHORT).show();
 
-            }else if(!Utils.checkRoomAndDate(mRoomItemSpinner.getRoomName(),
+            }else if(!checkRoomAndDate(mRoomItemSpinner.getRoomName(),
                     mTextDate.getText().toString(),
                     hourText.getText().toString(),
                     ReunionListActivity.mReunionListService.getReunionList())){
                 Snackbar.make(this.getView(),
                         "Select a new date for the mmeting in the room " + mRoomItemSpinner.getRoomName(),
-                        Snackbar.LENGTH_SHORT).show();
+                        Snackbar.LENGTH_LONG).show();
 
             }else{
                 Reunion reunion = createReunion();
@@ -201,53 +204,6 @@ public class CreationReunionFragment extends Fragment {
         );
     }
 
-    private String makeMailString(String mail){
-        String str = "";
-        String[] arrayString = mail.toLowerCase().split("[,;.:!§/$@?&#|]+");
-
-        for (String a : arrayString){
-            a += "@lamzone.com, ";
-            str += a;
-        }
-        return str;
-    }
-
-    private boolean checkHour(int hour, int minute){
-        if (hour < 9 || (hour >= 19 && minute >= 1)){
-            return false;
-        }else {
-            return true;
-        }
-    }
-
-    private boolean checkInputText(EditText textView){
-        if (textView.getText().toString().equals("")){
-            return false;
-        }else {
-            return true;
-        }
-    }
-
-    private String checkDate(String date){
-        if (date == null){
-            Date date1 = new Date();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
-            date = simpleDateFormat.format(date1);
-           return date;
-        }else {
-           return date;
-        }
-    }
-    private String checkHourNull(String hour){
-        if (hour == null){
-            Date date1 = new Date();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.FRENCH);
-            hour = simpleDateFormat.format(date1);
-            return hour;
-        }else {
-            return hour;
-        }
-    }
 }
 
 
