@@ -63,9 +63,7 @@ public class CreationReunionFragment extends Fragment {
     @BindView(R.id.button_create_reunion)
     Button mButtonCreateReunion;
 
-    public CreationReunionFragment() {
-        // Required empty public constructor
-    }
+    public CreationReunionFragment() {}
 
     @Override
     public void onAttach(Context context) {
@@ -80,7 +78,7 @@ public class CreationReunionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_creation_reunion, container, false);
 
         ButterKnife.bind(this,view);
@@ -145,7 +143,6 @@ public class CreationReunionFragment extends Fragment {
                 Snackbar.make(this.getView(),
                         "Select a new date for the mmeting in the room " + mRoomItemSpinner.getRoomName(),
                         Snackbar.LENGTH_LONG).show();
-
             }else{
                 Reunion reunion = createReunion();
                 mCreateReunionListener.onCreateReunion(reunion);

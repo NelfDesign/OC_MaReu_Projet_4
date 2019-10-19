@@ -94,7 +94,7 @@ public class ReunionFragment extends Fragment {
     }
 
     private void initListAdapter(List<Reunion> reunions) {
-        mRecyclerView.setAdapter( new ReunionListAdapter(reunions));
+        mRecyclerView.setAdapter(new ReunionListAdapter(reunions));
     }
 
     private void configurFab(){
