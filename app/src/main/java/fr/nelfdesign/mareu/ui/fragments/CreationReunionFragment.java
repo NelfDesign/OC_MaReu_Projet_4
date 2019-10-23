@@ -141,7 +141,7 @@ public class CreationReunionFragment extends Fragment {
                     hourText.getText().toString(),
                     ReunionListActivity.mReunionListService.getReunionList())){
                 Snackbar.make(this.getView(),
-                        "Select a new date for the mmeting in the room " + mRoomItemSpinner.getRoomName(),
+                        "Select a new date for the meeting in the room " + mRoomItemSpinner.getRoomName(),
                         Snackbar.LENGTH_LONG).show();
             }else{
                 Reunion reunion = createReunion();
