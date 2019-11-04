@@ -28,6 +28,7 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //configuration de la flèche retour si celle ci est affichée
         toolbar.setNavigationOnClickListener(v -> {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.framelayout_container, mReunionFragment)
@@ -57,7 +58,7 @@ public class ReunionListActivity extends AppCompatActivity implements ReunionFra
             mCreationReunionFragment = new CreationReunionFragment();
 
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.framelayout_container_create, mCreationReunionFragment)
+                    .replace(R.id.framelayout_container_create, mCreationReunionFragment)
                     .commit();
         }
         mReunionFragment.mFabListener = this;

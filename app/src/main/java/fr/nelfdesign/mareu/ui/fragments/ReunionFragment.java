@@ -41,7 +41,6 @@ public class ReunionFragment extends Fragment {
     }
 
     private RecyclerView mRecyclerView;
-    private ReunionListService mReunionList;
     List<Reunion> mReunions;
     private FloatingActionButton mFloatingActionButton;
     public fabListener mFabListener;
@@ -63,11 +62,9 @@ public class ReunionFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        if (ReunionListActivity.mReunionListService == null){
-            mReunionList = new ReunionListService();
-        }else{
-            mReunions = ReunionListActivity.mReunionListService.getReunionList();
-        }
+
+        mReunions = ReunionListActivity.mReunionListService.getReunionList();
+
     }
 
     @SuppressLint("RestrictedApi")
